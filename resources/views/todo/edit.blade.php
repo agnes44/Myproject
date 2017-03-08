@@ -8,8 +8,6 @@
         {{csrf_field()}}
         {{method_field('PUT')}}
             <fieldset>
-                <input type="text" name ="title" placeholder="title" value ="{{$item->title}}"> <br \>
-                {{ ($errors -> has('title')) ? $errors->first('title') : ' ' }} <br \><br \>
                 <textarea name="body" id="" cols="40" rows="8" placeholder="isi....">{{$item->body}}</textarea> <br \>
                 {{ ($errors -> has('body')) ? $errors->first('body') : ' ' }} <br \><br \>
                 <input type="date" name ="due_date" placeholder="" value="{{$item->due_date}}">

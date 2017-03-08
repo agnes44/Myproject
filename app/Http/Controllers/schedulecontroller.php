@@ -10,7 +10,6 @@ use App\Http\Requests\schedule\add;
 use App\Http\Requests\schedule\ubah;
 use Illuminate\Supprot\Facades\Input;
 
-
 class schedulecontroller extends Controller
 {
     /**

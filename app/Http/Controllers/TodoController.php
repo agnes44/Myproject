@@ -19,7 +19,7 @@ class TodoController extends Controller
     public function index()
     {
         $todos =todo::all();
-         return view('todo.page',['todos' => $todos]);
+        return view('todo.index',['todos' => $todos]);
     }
 
     /**
@@ -41,19 +41,17 @@ class TodoController extends Controller
     public function store(Request $request)
     {
         $this ->validate($request, [
-            'title' => 'required',
             'body' => 'required',
             'due_date' => 'required'
         ]);
 
         $todo = new todo;
-        $todo->title = $request->title;
         $todo->body = $request->body;
         $todo->due_date = $request->due_date;
         
         $todo->save();
 
-        return redirect('todo')-> with('message', 'todo telah diupdate');
+        return redirect('todo')-> with('message', 'todo telah ditambahkan');
     }
 
     /**
@@ -78,7 +76,7 @@ class TodoController extends Controller
     public function edit($id)
     {
          $item = todo::find($id);
-        return view('todo.edit',compact('item'));
+         return view('todo.edit',compact('item'));
     }
 
     /**
@@ -91,13 +89,11 @@ class TodoController extends Controller
     public function update(Request $request, $id)
     {
          $this ->validate($request, [
-            'title' => 'required',
             'body' => 'required',
             'due_date' => 'required'
         ]);
 
         $todo = todo::find($id);
-        $todo->title = $request->title;
         $todo->body = $request->body;
         $todo->due_date = $request->due_date;
         
@@ -123,7 +119,6 @@ class TodoController extends Controller
 
     public function editItem(Request $req) {
         $todo = todo::findOrfail($req->id);
-        $todo->title = $req->title;
         $todo->body = $req->body;
         $todo->due_date = $req->due_date;
 

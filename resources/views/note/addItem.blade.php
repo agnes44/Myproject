@@ -3,7 +3,6 @@
 @section('contents')
 <a href="/note" class ="btn btn-info">Back</a>
 <div class="col-lg-4 col-lg-offset-4">
-    <h3>Create Note</h3>
         <form class="form-horizontal" action="/note" method ="post">
         {{csrf_field()}}
             <fieldset>

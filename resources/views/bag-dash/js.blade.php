@@ -126,7 +126,7 @@
           'due_date': $('#due').val()
       },
       success: function(data) {
-          $('.item' + data.id).replaceWith("<tr class='item" + data.id + "'><td>" + data.id + "</td><td>" + data.title + "</td><td>" + data.body + "</td><td>" + data.due_date + "</td><td><button class='edit-modal btn btn-info' data-id='" + data.id + "' data-title='" + data.title + "' data-body='" + data.body + "' data-due_date='" + data.due_date + "'><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-title='" + data.title + "' data-body='" + data.body + "' data-due_date='" + data.due_date + "'><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
+          $('.item' + data.id).replaceWith("<tr class='item" + data.id + "'><td>" + data.id + "</td><td>" + data.title + "</td><td>" + data.body + "</td><td>" + data.due_date + "</td><td><button class='edit-modal btn btn-info' data-id='" + data.id + "' data-title='" + data.title + "' data-body ='" + data.body + "' data-due_date ='" + data.due_date+ "'><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-title='" + data.title + "' data-body ='" + data.body + "' data-due_date ='" + data.due_date + "'><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
       }
   });
 });
@@ -186,6 +186,22 @@ $('.modal-footer').on('click', '.delete', function() {
         $.ajax({
             type: 'POST',
             url: '/outlines/deleteItem',
+            data: {
+                '_token': $('input[name=_token]').val(),
+                'id': $('.id').text()
+            },
+            success: function(data) {
+                $('.item' + $('.id').text()).remove();
+            }
+        });
+    });
+
+// Delete  Outlines
+
+$('.modal-footer').on('click', '.delete', function() {
+        $.ajax({
+            type: 'POST',
+            url: '/note/deleteItem',
             data: {
                 '_token': $('input[name=_token]').val(),
                 'id': $('.id').text()
@@ -283,4 +299,37 @@ $('.modal-footer').on('click', '.delete', function() {
 
 
 <!--Start CRUD Note -->
+<script type ="text/javascript">
+// Edit Data (Modal and function edit data)
+    $(document).on('click', '.edit-modal', function() {
+    $('#footer_action_button').text(" Update");
+    $('#footer_action_button').addClass('glyphicon-check');
+    $('#footer_action_button').removeClass('glyphicon-trash');
+    $('.actionBtn').addClass('btn-success');
+    $('.actionBtn').removeClass('btn-danger');
+    $('.actionBtn').addClass('edit');
+    $('.modal-title').text('Edit');
+    $('.deleteContent').hide();
+    $('.form-horizontal').show();
+    $('#nid').val($(this).data('id'));
+    $('#title').val($(this).data('title'));
+    $('#isi').val($(this).data('body'));
+    $('#myModal').modal('show');
+});
+  $('.modal-footer').on('click', '.edit', function() {
+  $.ajax({
+      type: 'post',
+      url: '/note/editItem',
+      data: {
+          '_token': $('input[name=_token]').val(),
+          'id': $("#nid").val(),
+          'title': $('#title').val(),
+          'body': $('#isi').val()
+},
+      success: function(data) {
+          $('.item' + data.id).replaceWith("<tr class='item" + data.id + "'><td>" + data.id + "</td><td>" + data.title + "</td><td>" + data.body + "</td><td><button class='edit-modal btn btn-info' data-id='" + data.id + "' data-title='" + data.title + "' data-body='" + data.body + "'><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-title='" + data.title + "' data-body='" + data.body + "'><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
+      }
+  });
+});
+</script>
 <!--End CRUD Note -->

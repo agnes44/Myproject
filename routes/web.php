@@ -36,12 +36,20 @@ Route::get('/create',function () {
     return view('todo/create'); 
 });
 
+Route::get('/plus',function () {
+    return view('task/plus'); 
+});
+
 Route::get('/add',function () {
     return view('schedule/add'); 
 });
 
 Route::get('/tambah',function () {
     return view('outlines/tambah'); 
+});
+
+Route::get('/addItem',function () {
+    return view('note/addItem'); 
 });
 
 Route::post('/register','registercontroller@store')->name('register');
@@ -55,11 +63,14 @@ Route::group(['middleware' => ['web']], function () {
     Route::resource('schedule', 'schedulecontroller');
     Route::resource('note', 'notescontroller');
     Route::resource('outlines', 'outlinescontroller');
+    Route::resource('task', 'TasksController');
     Route::post('/todo/editItem', 'TodoController@editItem');
     Route::post('/todo/deleteItem', 'TodoController@deleteItem');
     Route::post('/schedule/ubah', 'schedulecontroller@ubah');
     Route::post('/schedule/deleteItem', 'schedulecontroller@deleteItem');
     Route::post('/outlines/editItem', 'outlinescontroller@editItem');
     Route::post('/outlines/deleteItem', 'outlinescontroller@deleteItem');
+    Route::post('/note/editItem', 'notescontroller@editItem');
+    Route::post('/note/deleteItem', 'notescontroller@deleteItem');
 });
     

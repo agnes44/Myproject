@@ -18,7 +18,6 @@
                 </a>
                 <div class="navbar-right">
                     <ul class="nav navbar-nav">
-                        </li>
                         <li class="dropdown tasks-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-tasks"></i>
@@ -201,7 +200,7 @@
                                 <span class="sm-st-icon st-red"><i class="fa fa-list" aria-hidden="true"></i></span>
                                 <div class="sm-st-info">
                                     <span>
-                                        <a href ="{{route('todo.index')}}">List</a>
+                                        <a href ="{{route('task.index')}}">List</a>
                                     </span>
                                 </div>
                             </div>

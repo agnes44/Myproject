@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Todo extends Model
+class Tasks extends Model
 {
-    protected $table = 'todos';
+    protected $table = 'tasks';
 }

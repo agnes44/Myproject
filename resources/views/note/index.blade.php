@@ -20,7 +20,7 @@
                                               <a href="create">
                                                   <button class="btn btn-default btn-xs"><i class="fa fa-check"></i></button>
                                               </a>
-                                                  <a href="coba"><button class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></button></a>
+                                                  <a href="{{'/note/'.$note->id.'/edit'}}"><button class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></button></a>
                                                 <form method ="post" action ="{{'/note/'.$note->id}}" class="pull-right hidden-phone">
                                                 {{csrf_field()}}
                                                 {{method_field('DELETE')}}

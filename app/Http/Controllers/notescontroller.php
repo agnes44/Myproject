@@ -3,7 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\note;
+use App\ note;
+use Validator;
+use Response;
+use App\Http\Requests\note\editItem;
+use App\Http\Requests\note\deleteItem;
+use Illuminate\Supprot\Facades\Input;
+
 class notescontroller extends Controller
 {
     /**
@@ -24,7 +30,7 @@ class notescontroller extends Controller
      */
     public function create()
     {
-        return view('note.create');
+        return view('note.addItem');
     }
 
     /**
@@ -105,5 +111,20 @@ class notescontroller extends Controller
          $item =note::find($id);
          $item->delete();
          return redirect('/note');
+    }
+
+     public function editItem(Request $req) {
+        $catatan = note::findOrfail($req->id);
+        $catatan->title = $req->title;
+        $catatan->body = $req->body;
+
+        $catatan->save();
+        return response ()->json ($catatan);
+    }
+
+    public function deleteItem(Request $req)
+    {
+        note::find($req->id)->delete();
+        return response()->json();
     }
 }

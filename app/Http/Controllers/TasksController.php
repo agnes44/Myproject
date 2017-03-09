@@ -17,7 +17,7 @@ class TasksController extends Controller
     {
         $todos = DB::table('todos')
                     ->select('*')
-                    ->paginate(5);
+                    ->paginate(6);
 
         return view('task.index', [
             'todos' => $todos,

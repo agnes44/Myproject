@@ -15,11 +15,13 @@ class TasksController extends Controller
      */
     public function index()
     {
-        $tasks = DB::table('tasks')
-                    ->leftJoin('todos', 'tasks.id_todos', '=', 'todos.id')
+        $todos = DB::table('todos')
                     ->select('*')
                     ->paginate(5);
-        return view('task.index', ['tasks' => $tasks]);
+
+        return view('task.index', [
+            'todos' => $todos,
+        ]);
     }
 
     /**

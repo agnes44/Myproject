@@ -8,12 +8,12 @@
              <input type="text" class ="form-control" id ="body" name ="body" placeholder="Your body here" required="required">
                  {{ ($errors -> has('body')) ? $errors->first('body') : ' ' }} <br \>
              
-          </form>
+        </form>
 </div>
 <ul class="task-list"> 
-        @foreach ($tasks as $task)
-                <div class="task-title">
-                    <h3>{{($task->title)}}</h3>
+        @foreach ($todos as $todo)
+                <div class="todo-title">
+                    <h3>{{($todo->body)}}</h3>
                 </div>
 
         <ul class="task-list"> 
@@ -24,22 +24,25 @@
                     <!-- <input type="checkbox" class="square-grey"/> -->
                 </div>
                 <div class="task-title">
-                    <span class="task-title-sp">
+                  @foreach (DB::table('tasks')->where('id_todos', $todo->id)->get() as $task)
+                    {{ $task->title }}<br \>
+                  @endforeach
+                    {{-- <span class="task-title-sp">
                         <a href="{{'/task/'.$task->id_todos}}">{{($task->body)}}</a>
-                    </span>
-          
+                    </span> --}}
+              
                     <div class="pull-right hidden-phone">
                         <a href="create">
                             <button class="btn btn-default btn-xs"><i class="fa fa-check"></i></button>
                         </a>
-                        <a href="{{'/task/'.$task->id.'/edit'}}">
+                       {{--  <a href="{{'/task/'.$task->id.'/edit'}}">
                             <button class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></button>
                         </a>
                         <form method ="post" action ="{{'/task/'.$task->id}}" class="pull-right hidden-phone">
                             {{csrf_field()}}
                             {{method_field('DELETE')}}
                             <button class="btn btn-default btn-xs"><i class="fa fa-times"></i></button>
-                        </form>      
+                        </form>       --}}
                     </div>
                 </div>
             </li>                  

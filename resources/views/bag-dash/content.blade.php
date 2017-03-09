@@ -9,7 +9,7 @@
                                 <span class="sm-st-icon st-red"><i class="fa fa-list" aria-hidden="true"></i></span>
                                 <div class="sm-st-info">
                                     <span>
-                                        <a href ="{{route('task.index')}}">List</a>
+                                        <a href ="{{route('todo.index')}}">List</a>
                                     </span>
                                 </div>
                             </div>

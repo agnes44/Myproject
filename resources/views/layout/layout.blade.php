@@ -91,7 +91,7 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                         {{ Auth::user()->name }} <span class="caret"></span>
-                                    </a>
+                            </a>
 
                             <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-user"></i>
@@ -200,7 +200,7 @@
                                 <span class="sm-st-icon st-red"><i class="fa fa-list" aria-hidden="true"></i></span>
                                 <div class="sm-st-info">
                                     <span>
-                                        <a href ="{{route('task.index')}}">List</a>
+                                        <a href ="{{route('todo.index')}}">List</a>
                                     </span>
                                 </div>
                             </div>

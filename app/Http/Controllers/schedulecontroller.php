@@ -20,7 +20,7 @@ class schedulecontroller extends Controller
     public function index()
     {
         $jadwal = schedule::all();
-        return view('schedule.page', compact('jadwal'));
+        return view('schedule.coba', compact('jadwal'));
     }
 
     /**

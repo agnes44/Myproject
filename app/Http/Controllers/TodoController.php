@@ -41,14 +41,12 @@ class TodoController extends Controller
     public function store(Request $request)
     {
         $this ->validate($request, [
-            'body' => 'required',
-            'due_date' => 'required'
+            'body' => 'required'
         ]);
 
         $todo = new todo;
         $todo->body = $request->body;
-        $todo->due_date = $request->due_date;
-        
+
         $todo->save();
 
         return redirect('todo')-> with('message', 'todo telah ditambahkan');
@@ -95,7 +93,6 @@ class TodoController extends Controller
 
         $todo = todo::find($id);
         $todo->body = $request->body;
-        $todo->due_date = $request->due_date;
         
         $todo->save();
 
@@ -120,7 +117,6 @@ class TodoController extends Controller
     public function editItem(Request $req) {
         $todo = todo::findOrfail($req->id);
         $todo->body = $req->body;
-        $todo->due_date = $req->due_date;
 
         $todo->save();
         return response ()->json ($todo);

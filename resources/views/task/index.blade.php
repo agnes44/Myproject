@@ -1,15 +1,8 @@
  @extends('layout.layout')
 
  @section('contents')
- <a href="/plus" class ="btn btn-info">Create List</a> <br \><br \>
- <div class="col-lg-12 ">
-        <form class="form-horizontal" action="/todo" method ="post">
-        {{csrf_field()}}
-             <input type="text" class ="form-control" id ="body" name ="body" placeholder="Your body here" required="required">
-                 {{ ($errors -> has('body')) ? $errors->first('body') : ' ' }} <br \>
-             
-        </form>
-</div>
+ <a href="/plus" class ="btn btn-info">Create todo</a> <br \><br \>
+
 <ul class="task-list"> 
         @foreach ($todos as $todo)
                 <div class="todo-title">
@@ -28,7 +21,7 @@
                 <div class="task-title">
                   <span class ="task-title-sp">{{ $task->title }}<br \></span>
                   <div class="pull-right hidden-phone">
-                        <a href="create">
+                        <a href="/plus">
                             <button class="btn btn-default btn-xs"><i class="fa fa-check"></i></button>
                         </a>
                         <a href="{{'/todo/'.$todo->id.'/edit'}}">
@@ -48,7 +41,7 @@
                         <a href="{{'/task/'.$task->id_todos}}">{{($task->body)}}</a>
                     </span> --}}
               
-                    <{{-- div class="pull-right hidden-phone">
+                    {{-- <div class="pull-right hidden-phone">
                         <a href="create">
                             <button class="btn btn-default btn-xs"><i class="fa fa-check"></i></button>
                         </a>

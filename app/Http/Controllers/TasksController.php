@@ -17,7 +17,7 @@ class TasksController extends Controller
     {
         $todos = DB::table('todos')
                     ->select('*')
-                    ->paginate(6);
+                    ->paginate(1);
 
         return view('task.index', [
             'todos' => $todos,
@@ -45,6 +45,7 @@ class TasksController extends Controller
     {
         $task = new  tasks;
         $task->title = $request->title;
+        $task->due_date = $request->due_date;
         $task->id_todos = $request->id_todos;
         $task->save();
 
@@ -94,6 +95,7 @@ class TasksController extends Controller
 
         $task = tasks::find($id);
         $task->title = $request->title;
+        $task->due_date = $request->due_date;
         $task->save();
 
         return redirect('task')-> with('message', 'tasks telah diupdate');

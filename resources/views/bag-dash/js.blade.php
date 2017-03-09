@@ -15,6 +15,9 @@
 
         <script src="js/plugins/chart.js" type="text/javascript"></script>
 
+        <!-- fullcalender -->
+        <script src ="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.js"></script><script src ="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>         
+
         <!-- datepicker
         <script src="js/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>-->
         <!-- Bootstrap WYSIHTML5
@@ -333,3 +336,16 @@ $('.modal-footer').on('click', '.delete', function() {
 });
 </script>
 <!--End CRUD Note -->
+
+<script type ="text/javascript">
+$(document).ready(function() {
+
+    // page is now ready, initialize the calendar...
+
+    $('#fulcal').fullCalendar({
+        // put your options and callbacks here
+    })
+
+});
+
+</script>

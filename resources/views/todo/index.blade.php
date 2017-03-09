@@ -19,11 +19,11 @@
                 </div>
                 <div class="task-title">
                     <span class="task-title-sp">
-                        <a href="{{'/todo/'.$todo->id}}">{{($todo->body)}}</a>
+                        <a href="/task">{{($todo->body)}}</a>
                     </span>
                     <span class="label label-success">{{$todo->created_at->diffForHumans()}}</span>
                     <div class="pull-right hidden-phone">
-                        <a href="create">
+                        <a href="/plus">
                             <button class="btn btn-default btn-xs"><i class="fa fa-check"></i></button>
                         </a>
                         <a href="{{'/todo/'.$todo->id.'/edit'}}">

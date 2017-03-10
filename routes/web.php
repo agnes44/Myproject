@@ -72,5 +72,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/outlines/deleteItem', 'outlinescontroller@deleteItem');
     Route::post('/note/editItem', 'notescontroller@editItem');
     Route::post('/note/deleteItem', 'notescontroller@deleteItem');
+    Route::resource('events', 'EventsController',['only' => ['index', 'store']]);
 });
     

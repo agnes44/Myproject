@@ -12,14 +12,27 @@
         <script src="js/bootstrap.min (2).js " type="text/javascript"></script>
         <!-- daterangepicker -->
         <script src="js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+        <!-- datetimepicker -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+        <!--colorpicker-->
+        <script src="js/bootstrap-colorpicker.min.js" type="text/javascript"></script>
 
         <script src="js/plugins/chart.js" type="text/javascript"></script>
 
         <!-- fullcalender -->
-        <script src ="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.js"></script><script src ="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>         
+        <script src="js/moment.min.js" type="text/javascript"></script>
+        <script src="js/fullcalendar.min.js" type="text/javascript"></script>
+        {{-- <script src ="{{ asset('') }}"></script>
+        <script src ="{{ asset('') }}"></script>
+        <script src ="{{ asset('') }}"></script> --}}
+        {{-- {!! Html::script('vendor/calendar/fullcalender/lib/jquery.min.js') !!}
+        {!! Html::script('vendor/calendar/fullcalender/lib/moment.min.js') !!}
+        {!! Html::script('vendor/calendar/fullcalender/fullcalender.mi.js') !!} --}}
+        
+         
 
         <!-- datepicker
-        <script src="js/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>-->
+        <script src="js/plugins/datepicker/bootstra  p-datepicker.js" type="text/javascript"></script>-->
         <!-- Bootstrap WYSIHTML5
         <script src="js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>-->
         <!-- iCheck -->
@@ -337,15 +350,43 @@ $('.modal-footer').on('click', '.delete', function() {
 </script>
 <!--End CRUD Note -->
 
-<script type ="text/javascript">
-$(document).ready(function() {
+<script>
+  var BASEURL = "{{ url('/') }}";
+  $(document).ready(function() {
+    $('#calendar').fullCalendar({
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,basicWeek,basicDay'
+      },
+      defaultDate: '2017-10-03',
+      navLinks: true, // can click day/week names to navigate views
+      editable: true,
+      selectable: true,
+      selectHelper: true, 
 
-    // page is now ready, initialize the calendar...
+      select: function(start){
+          start = moment(start, 'DD.MM.YYYY').format('YYYY-MM-DD');
+          $('#date_start').val(start.format('YYYY-MM-DD'));
+          $('#responsive-modal').modal('show');
+      },
+      
+      events: BASEURL + '/events'
+    });
+    
+  });
 
-    $('#fulcal').fullCalendar({
-        // put your options and callbacks here
-    })
+$('.colorpicker').colorpicker();
 
+$('#time_start').bootstrap-Material-DatePicker({
+    date: false,
+    shortTime: false,
+    format : 'HH:mm:ss'
 });
 
+$('#date_end').bootstrap-Material-DatePicker({
+    date: true,
+    shortTime: false,
+    format : 'YYYY-MM-DD HH:mm:ss'
+});
 </script>

@@ -18,7 +18,13 @@
     <!-- Date Picker -->
     <link href="css/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
     <!-- fullCalendar -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css" />
+    <!--DateTime picker -->
+    <link href="css/colorpicker/bootstrap-colorpicker.min.css" rel="stylesheet" type="text/css" />
+
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css" rel="stylesheet">
     <!-- Daterange picker -->
     <link href="css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
     <!-- iCheck for checkboxes and radio inputs -->

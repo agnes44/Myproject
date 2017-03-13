@@ -5,6 +5,7 @@ namespace App\Http\Controllers\AdminAuth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -56,5 +57,23 @@ class LoginController extends Controller
     protected function guard()
     {
         return Auth::guard('admin_user');
+    }
+
+    /** 
+    * Log the user out of the application.
+    * 
+    * @param request $request
+    * @return \Illuiminate\Http\Response
+    */
+
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->flush();
+
+        $request->session()->regenerate();
+
+        return redirect('/admin_login');
     }
 }

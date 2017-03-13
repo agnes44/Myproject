@@ -3,8 +3,6 @@
         <script src="js/jquery.min.js" type="text/javascript"></script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
         <!-- jQuery UI 1.10.3 -->
         <script src="js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
@@ -13,7 +11,7 @@
         <!-- daterangepicker -->
         <script src="js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
         <!-- datetimepicker -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+        <script src="js/plugins/bs-datetimepicker/bootstrap-datetimepicker.js"></script>
         <!--colorpicker-->
         <script src="js/bootstrap-colorpicker.min.js" type="text/javascript"></script>
 
@@ -125,9 +123,7 @@
     $('.deleteContent').hide();
     $('.form-horizontal').show();
     $('#fid').val($(this).data('id'));
-    $('#t').val($(this).data('title'));
     $('#b').val($(this).data('body'));
-    $('#due').val($(this).data('due_date'));
     $('#myModal').modal('show');
 });
   $('.modal-footer').on('click', '.edit', function() {
@@ -137,12 +133,10 @@
       data: {
           '_token': $('input[name=_token]').val(),
           'id': $("#fid").val(),
-          'title': $('#t').val(),
-          'body': $('#b').val(),
-          'due_date': $('#due').val()
+          'body': $('#b').val()
       },
       success: function(data) {
-          $('.item' + data.id).replaceWith("<tr class='item" + data.id + "'><td>" + data.id + "</td><td>" + data.title + "</td><td>" + data.body + "</td><td>" + data.due_date + "</td><td><button class='edit-modal btn btn-info' data-id='" + data.id + "' data-title='" + data.title + "' data-body ='" + data.body + "' data-due_date ='" + data.due_date+ "'><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-title='" + data.title + "' data-body ='" + data.body + "' data-due_date ='" + data.due_date + "'><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
+          $('.item' + data.id).replaceWith("<ul class ='task-list'><li class='item" + data.id + "'><div class='task-checkbox'><input type='checkbox' class='flat-grey list-child'/></div><div class='task-title'><span class='task-title-sp'>" + data.body + "</span><span><button class='edit-modal btn btn-info btn-xs' data-id='" + data.id + "' data-body ='" + data.body + "'><span class='glyphicon glyphicon-edit'></span></button></span><button class='delete-modal btn btn-danger btn-xs' data-id='" + data.id + "' data-body ='" + data.body + "'><span class='glyphicon glyphicon-trash'></span></button></div></li></ul>");
       }
   });
 });
@@ -212,7 +206,7 @@ $('.modal-footer').on('click', '.delete', function() {
         });
     });
 
-// Delete  Outlines
+// Delete  Note
 
 $('.modal-footer').on('click', '.delete', function() {
         $.ajax({
@@ -351,10 +345,10 @@ $('.modal-footer').on('click', '.delete', function() {
 <!--End CRUD Note -->
 
 <script>
-  var BASEURL = "{{ url('/') }}";
-  $(document).ready(function() {
+var BASEURL = "{{ url('/') }}";
+$(document).ready(function() {
     $('#calendar').fullCalendar({
-      header: {
+        header: {
         left: 'prev,next today',
         center: 'title',
         right: 'month,basicWeek,basicDay'
@@ -365,28 +359,70 @@ $('.modal-footer').on('click', '.delete', function() {
       selectable: true,
       selectHelper: true, 
 
-      select: function(start){
-          start = moment(start, 'DD.MM.YYYY').format('YYYY-MM-DD');
-          $('#date_start').val(start.format('YYYY-MM-DD'));
-          $('#responsive-modal').modal('show');
-      },
-      
-      events: BASEURL + '/events'
+      select: function(start, end) {
+        $.getScript('/events/new', function() {
+          $('#event_date_range').val(moment(start).format("MM/DD/YYYY HH:mm") + '-' + moment(end).format("MM/DD/YYYY HH:mm"));
+          date_range_picker();
+          $('.start_hidden').val(moment(start).format('YYYY/MM/DD HH:mm'));
+          $('.end_hidden').val(moment(end).format('YYYY/MM/DD HH:mm'));
+        });
+        
+        events: BASEURL + '/events'
+      }
     });
-    
   });
 
+  function daySelectionMousedown(ev) { // not really a generic manager method, oh well
+    var cellToDate = t.cellToDate;
+    var getIsCellAllDay = t.getIsCellAllDay;
+    var hoverListener = t.getHoverListener();
+    var reportDayClick = t.reportDayClick; // this is hacky and sort of weird
+    if (ev.which == 1 && opt('selectable')) { // which==1 means left mouse button
+      unselect(ev);
+      var _mousedownElement = this;
+      var dates;
+      hoverListener.start(function(cell, origCell) { // TODO: maybe put cellToDate/getIsCellAllDay info in cell
+        clearSelection();
+        if (cell && getIsCellAllDay(cell)) {
+          dates = [ cellToDate(origCell), cellToDate(cell) ].sort(dateCompare);
+          renderSelection(dates[0], dates[1], true);
+        }else{
+          dates = null;
+        }
+      }, ev);
+      $(document).one('mouseup', function(ev) {
+        hoverListener.stop();
+        if (dates) {
+          if (+dates[0] == +dates[1]) {
+            reportDayClick(dates[0], true, ev);
+          }
+          reportSelection(dates[0], dates[1], true, ev);
+        }
+      });
+    }
+  }
+
+
+}
 $('.colorpicker').colorpicker();
 
-$('#time_start').bootstrap-Material-DatePicker({
+$('#time_start').bootstrapMaterialDatePicker({
     date: false,
     shortTime: false,
     format : 'HH:mm:ss'
 });
 
-$('#date_end').bootstrap-Material-DatePicker({
-    date: true,
-    shortTime: false,
-    format : 'YYYY-MM-DD HH:mm:ss'
+// $('#date_end').bootstrapMaterialDatePicker({
+//     date: true,
+//     shortTime: false,
+//     format : 'YYYY-MM-DD HH:mm:ss'
+// });
+
+
+
+$('#date_end').bootstrapMaterialDatePicker({ 
+  date : true, 
+  shorTime: false,
+  format : 'DD MMMM YYYY - HH:mm'
 });
 </script>

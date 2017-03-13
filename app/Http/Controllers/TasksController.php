@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use DB;
 use Illuminate\Http\Request;
 use App\Tasks;
-
+use App\todo;
 class TasksController extends Controller
 {
     /**
@@ -15,6 +14,7 @@ class TasksController extends Controller
      */
     public function index()
     {
+
         $todos = DB::table('todos')
                     ->select('*')
                     ->paginate(1);
@@ -43,7 +43,7 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        $task = new  tasks;
+        $task = new  Tasks;
         $task->title = $request->title;
         $task->due_date = $request->due_date;
         $task->id_todos = $request->id_todos;
@@ -60,7 +60,7 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-        $item = tasks::find($id);
+        $item = Tasks::find($id);
         return view('task.show',compact('item'));
     }
 
@@ -73,10 +73,10 @@ class TasksController extends Controller
     public function edit($id)
     {
         $todos = todo::get();
-        $item = tasks::find($id);
+        $task = Tasks::where('id',$id)->first();
         return view('task.edit',[
-                    'tasks' => $tasks,
-                    'todos' => $todos,
+                    'tasks' => $task,
+                    'todos' => $todos
             ]);
     }
 
@@ -89,13 +89,12 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this ->validate($request, [
+         $this ->validate($request, [
             'title' => 'required'
         ]);        
 
-        $task = tasks::find($id);
+        $task = Tasks::find($id);
         $task->title = $request->title;
-        $task->due_date = $request->due_date;
         $task->save();
 
         return redirect('task')-> with('message', 'tasks telah diupdate');
@@ -109,7 +108,7 @@ class TasksController extends Controller
      */
     public function destroy($id)
     {
-        $item =tasks::find($id);
+        $item =Tasks::find($id);
         $item->delete();
         return redirect('/task');
     }

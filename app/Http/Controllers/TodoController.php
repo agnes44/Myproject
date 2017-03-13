@@ -87,18 +87,16 @@ class TodoController extends Controller
     public function update(Request $request, $id)
     {
          $this ->validate($request, [
-            'body' => 'required',
-            'due_date' => 'required'
+            'body' => 'required'
         ]);
 
         $todo = todo::find($id);
         $todo->body = $request->body;
         
         $todo->save();
+        return redirect('todo')-> with('message', 'todo telah diedit');
 
-        /*return redirect('todo')-> with('message', 'todo telah diedit');*/
-
-        return response()->json($todo);
+        //return response()->json($todo);
     }
 
     /**

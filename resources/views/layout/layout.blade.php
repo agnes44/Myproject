@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    @include('bag-dash.header')
+      @include('bag-dash.header')
       <body class="skin-black">
         <!-- header logo: style can be found in header.less -->
         <header class="header">
@@ -18,6 +18,7 @@
                 </a>
                 <div class="navbar-right">
                     <ul class="nav navbar-nav">
+                        </li>
                         <li class="dropdown tasks-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-tasks"></i>
@@ -91,7 +92,7 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                         {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
+                                    </a>
 
                             <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-user"></i>
@@ -169,19 +170,19 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="general.html">
+                                    <a href="#">
                                         <i class="fa fa-users"></i> <span>Team</span>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="basic_form.html">
+                                    <a href="#">
                                         <i class="fa fa-globe"></i> <span>Basic Elements</span>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="simple.html">
+                                    <a href="#">
                                         <i class="fa fa-glass"></i> <span>Simple tables</span>
                                     </a>
                                 </li>
@@ -242,7 +243,7 @@
                         <div class="col-md-12">
                           <section class="panel tasks-widget">
                               <header class="panel-heading">
-                                  Todo list
+                                  &nbsp;
                             </header>
                             <div class="panel-body">
                                @yield('contents')                              
@@ -253,6 +254,7 @@
               </div>
                 @include('bag-dash.footer')
         </aside><!-- /.right-side -->
+
     @include('bag-dash.js')
 </body>
 </html>

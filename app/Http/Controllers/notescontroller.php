@@ -20,7 +20,7 @@ class notescontroller extends Controller
     public function index()
     {
         $catatan =note::all();
-        return view('note.index', compact('catatan'));
+        return view('note.page', compact('catatan'));
     }
 
     /**

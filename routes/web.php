@@ -55,10 +55,19 @@ Route::get('/addItem',function () {
 Route::post('/register','registercontroller@store')->name('register');
 Route::post('/login','logincontroller@store')->name('login');
 Auth::routes();
-
-Route::get('/home', 'HomeController@index');
+Route::get('admin_login', 'AdminAuth\logincontroller@showLoginForm');
+Route::post('admin_login', 'AdminAuth\logincontroller@login');
+Route::post('admin_logout', 'AdminAuth\logincontroller@logout');
+Route::post('admin_password/email', 'AdminAuth\ForgotPasswordController@sendResetLinkEmail');
+Route::get('admin_password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm');
+Route::post('admin_password/reset', 'AdminAuth\ResetPasswordController@reset');
+Route::get('admin_password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
+Route::get('admin_register', 'AdminAuth\RegisterController@showRegistrationForm');
+Route::get('admin_register', 'AdminAuth\RegisterController@register');
 
 Route::group(['middleware' => ['web']], function () {
+    Route::get('/home', 'HomeController@index');
+    Route::get('/admin_home', 'AdminHomeController@index');
     Route::resource('todo', 'TodoController');  
     Route::resource('schedule', 'schedulecontroller');
     Route::resource('note', 'notescontroller');

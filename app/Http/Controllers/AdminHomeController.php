@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class AdminHomeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin_user');
+    }
+
     public function index ()
     {
         return view("admin-home");

@@ -1,30 +1,38 @@
  @extends('layout.layout')
 
 @section('contents')
-<a href="outlines/create" class ="btn btn-info">Add New</a>
-<div class="col-lg-6 col-lg-offset-3">
-    <h1>Outlines</h1>
-        <ul class="list-group col-lg-8">
-                @foreach ($ide as $outlines)
-                    <li class="list-group-item">
-                        <a href="{{'/outlines/'.$outlines->id}}">{{($outlines->title)}}</a>
-                        <span class="pull-right">{{$outlines->created_at->diffForHumans()}}</span>
-                    </li>
-                @endforeach
-        </ul> 
-
-         <ul class="list-group col-lg-4">
-            @foreach ($ide as $outlines)
-                <li class="list-group-item">
-                    <a href="{{'/outlines/'.$outlines->id.'/edit'}}"><span class="glyphicon glyphicon-edit"></span</a>
-
-                    <form method ="post" action ="{{'/outlines/'.$outlines->id}}"  class="form-group pull-right col-lg-3">
-                    {{csrf_field()}}
-                    {{method_field('DELETE')}}
-                    <button type="submit" style="border:none;"><span class="glyphicon glyphicon-trash"></span></button>
-                    </form>
-                </li>
-            @endforeach
-        </ul>
+<div class="form-group row add">
+       <div class="form-group">
+            <div class="col-md-2" >
+                 <a href="tambah" class ="btn btn-info">Add New</a>
+            </div>
+       </div>          
 </div>
-@endsection
+<div class="task-content">
+ <ul class="task-list"> 
+        @foreach ($baris as $outlines)
+            <li>
+                <div class="task-title">
+                    <span class="task-title-sp">
+                        <a href="/line">{{($outlines->body)}}</a>
+                    </span>
+                    <span class="label label-success">{{$outlines->created_at->diffForHumans()}}</span>
+                    <div class="pull-right hidden-phone">
+                        <a href="/plus">
+                            <button class="btn btn-default btn-xs"><i class="fa fa-check"></i></button>
+                        </a>
+                        <a href="{{'/outlines/'.$outlines->id.'/edit'}}">
+                            <button class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></button>
+                        </a>
+                        <form method ="post" action ="{{'/outlines/'.$outlines->id}}" class="pull-right hidden-phone">
+                            {{csrf_field()}}
+                            {{method_field('DELETE')}}
+                            <button class="btn btn-default btn-xs"><i class="fa fa-times"></i></button>
+                        </form>      
+                    </div>
+                </div>
+            </li>                  
+        @endforeach
+    </ul>
+</div>
+@stop

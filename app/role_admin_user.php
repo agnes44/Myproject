@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class register extends Model
+class role_admin_user extends Model
 {
-    protected $table = 'tb_user';
+    //
 }

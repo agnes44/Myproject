@@ -32,4 +32,14 @@ class CreateAdminUsersTable extends Migration
     {
         Schema::dropIfExists('admin_users');
     }
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        Schema::defaultStringLength(191);
+    }
 }

@@ -3,7 +3,7 @@
 @section('contents')
 <div class="task-title">
     <h3>Full calendar</h3>
-    {{ Form::open(['route' => 'events.store', 'method' => 'post', 'role' => 'form']) }}
+    {{-- {{ Form::open(['route' => 'events.store', 'method' => 'post', 'role' => 'form']) }}
         <div id="responsive-modal" class="modal fade" tabindex="-1" data-backdrop ="static">
             <div class="modal-dialog">
              <div class="modal-content">
@@ -43,7 +43,7 @@
                 </div>
             </div>
         </div>
-    {{ Form::close() }}
+    {{ Form::close() }} --}}
     <div id='calendar'></div>        
 </div>
 @stop

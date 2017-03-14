@@ -19,7 +19,7 @@ class outlinescontroller extends Controller
     public function index()
     {
         $ide = outlines::all();
-        return view('outlines.page',compact('ide'));
+        return view('outlines.index',compact('ide'));
     }
 
     /**

@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use DB;
+
 use Illuminate\Http\Request;
-use App\Tasks;
-use App\todo;
-class TasksController extends Controller
+
+class LinesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,14 +13,8 @@ class TasksController extends Controller
      */
     public function index()
     {
-
-        $todos = DB::table('todos')
-                    ->select('*')
-                    ->paginate(2);
-
-        return view('task.index', [
-            'todos' => $todos,
-        ]);
+        $baris = lines::all();
+        return view('lines.index', ,['baris' => $baris])
     }
 
     /**
@@ -31,8 +24,7 @@ class TasksController extends Controller
      */
     public function create()
     {
-        $todos = DB::table('todos')->get();
-        return view('task.plus',['todos' => $todos]);
+        //
     }
 
     /**
@@ -43,13 +35,7 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        $task = new  Tasks;
-        $task->title = $request->title;
-        $task->due_date = $request->due_date;
-        $task->id_todos = $request->id_todos;
-        $task->save();
-
-        return redirect('task')-> with('message', 'task telah diupdate');
+        //
     }
 
     /**
@@ -60,8 +46,7 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-        $item = Tasks::find($id);
-        return view('task.show',compact('item'));
+        //
     }
 
     /**
@@ -72,12 +57,7 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
-        $todos = todo::get();
-        $task = Tasks::where('id',$id)->first();
-        return view('task.edit',[
-                    'tasks' => $task,
-                    'todos' => $todos
-            ]);
+        //
     }
 
     /**
@@ -89,15 +69,7 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $this ->validate($request, [
-            'title' => 'required'
-        ]);        
-
-        $task = Tasks::find($id);
-        $task->title = $request->title;
-        $task->save();
-
-        return redirect('task')-> with('message', 'tasks telah diupdate');
+        //
     }
 
     /**
@@ -108,8 +80,6 @@ class TasksController extends Controller
      */
     public function destroy($id)
     {
-        $item =Tasks::find($id);
-        $item->delete();
-        return redirect('/task');
+        //
     }
 }

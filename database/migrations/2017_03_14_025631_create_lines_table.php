@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateListTable extends Migration
+class CreateLinesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,12 @@ class CreateListTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('lines', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title');
+            $table->integer('id_outlines');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +28,6 @@ class CreateListTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('lines');
     }
 }

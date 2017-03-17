@@ -18,8 +18,8 @@ class outlinescontroller extends Controller
      */
     public function index()
     {
-        $ide = outlines::all();
-        return view('outlines.index',compact('ide'));
+        $ide =outlines::all();
+        return view('outlines.index',['ide' => $ide]);
     }
 
     /**
@@ -41,14 +41,12 @@ class outlinescontroller extends Controller
     public function store(Request $request)
     {
         $this ->validate($request, [
-            'title' => 'required',
             'body' => 'required'
         ]);    
 
-        $ide = new  outlines;
-        $ide->title = $request->title;
-        $ide->body = $request->body;
-        $ide->save();
+        $outlines = new  outlines;
+        $outlines->body = $request->body;
+        $outlines->save();
 
         return redirect('outlines')-> with('message', 'outlines telah diupdate');
     }
@@ -87,14 +85,12 @@ class outlinescontroller extends Controller
     public function update(Request $request, $id)
     {
         $this ->validate($request, [
-            'title' => 'required',
             'body' => 'required'
         ]);        
 
-        $ide = outlines::find($id);
-        $ide->title = $request->title;
-        $ide->body = $request->body;
-        $ide->save();
+        $outlines = outlines::find($id);
+        $outlines->body = $request->body;
+        $outlines->save();
 
         return redirect('outlines')-> with('message', 'outlines telah diupdate');
     }
@@ -114,7 +110,6 @@ class outlinescontroller extends Controller
 
     public function editItem(Request $req) {
         $outlines = outlines::findOrfail($req->id);
-        $outlines->title = $req->title;
         $outlines->body = $req->body;
 
         $outlines->save();

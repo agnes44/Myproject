@@ -171,7 +171,7 @@
                                 </li>
                                 <li>
                                     <a href="general.html">
-                                        <i class="fa fa-users"></i> <span>Team</span>
+                                        <i class="fa fa-users"></i> <span>General</span>
                                     </a>
                                 </li>
 

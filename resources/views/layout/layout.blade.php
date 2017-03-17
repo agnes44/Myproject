@@ -171,7 +171,7 @@
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <i class="fa fa-users"></i> <span>Team</span>
+                                        <i class="fa fa-users"></i> <span>General</span>
                                     </a>
                                 </li>
 
@@ -221,7 +221,7 @@
                                 <span class="sm-st-icon st-blue"><i class="fa fa-list-alt" aria-hidden="true"></i></i></span>
                                 <div class="sm-st-info">
                                     <span>
-                                            <a href = "{{route('outlines.index')}}">Outlines</a>
+                                            <a href = "{{route('lines.index')}}">Outlines</a>
                                     </span>
                                 </div>
                             </div>

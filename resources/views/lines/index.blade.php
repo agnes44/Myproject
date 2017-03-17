@@ -1,32 +1,25 @@
  @extends('layout.layout')
 
-@section('contents')
-<div class="form-group row add">
-       <div class="form-group">
-            <div class="col-md-2" >
-                 <a href="#" class ="btn btn-info">Add New</a>
-            </div>
-       </div>          
-</div>
-<div class="task-content">
+ @section('contents')
+ <a href="/tambahdata" class ="btn btn-info">Create outlines</a> <br \><br \>
+
 <div class="row">
-  <div class="span3">
-    <div class="well">
-        <div>
+    <div class="span3">
+        <div class="well">
             <ul class="nav nav-list">
                 <li>
+                @foreach ($ide as $outlines)
                     <label class="tree-toggle nav-header">
-                        @foreach ($baris as $outlines)
-                            <div class="outlines-title">
-                                <h4>{{($outlines->body)}}</h4>
-                            </div>
+                            {{($outlines->id)}}
                     </label>
-                    <ul class="nav nav-list tree">
-                        <li><a href="#">JavaScript</a></li>
-                        <li><a href="#">CSS</a></li>
-                        <li><label class="tree-toggle nav-header">Buttons</label>
+                     <ul class="nav nav-list tree">
+                         @foreach (DB::table('lines')->where('id_outlines', $outlines->id)->get() as $baris)
+                            <li>{{ $baris->title }}</li>
+                        @endforeach
+                        
+                        {{-- <li><label class="tree-toggle nav-header">Buttons</label>
                             <ul class="nav nav-list tree">
-                                <li><a href="#">Colors</a></li>
+                                <li><a href="#">Colors</a></li> 
                                 <li><a href="#">Sizes</a></li>
                                 <li><label class="tree-toggle nav-header">Forms</label>
                                     <ul class="nav nav-list tree">
@@ -35,14 +28,12 @@
                                     </ul>
                                 </li>
                             </ul>
-                        </li>
+                        </li> --}}
                     </ul>
-                     @endforeach
+                @endforeach
                 </li>
             </ul>
         </div>
     </div>
-    </div>
-</div>
 </div>
 @stop

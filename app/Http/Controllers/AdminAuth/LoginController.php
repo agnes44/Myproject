@@ -40,6 +40,27 @@ class LoginController extends Controller
     }
 
     /**
+     * Send the response after the user was authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    protected function sendLoginResponse(Request $request)
+    {
+        $request->session()->regenerate();
+
+        $this->clearLoginAttempts($request);
+
+        foreach ($this->guard()->user()->role as role) {
+            if ($role->name == 'admin') {
+                return redirect('admin/home');
+            } elseif ($role->name == 'siswa') {
+                return redirect('admin/siswa')
+            }
+        }
+    }
+
+    /**
     * Show the aplplication's login form.
     * 
     * @return\Illuminate\Http\Response

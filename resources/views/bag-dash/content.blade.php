@@ -29,7 +29,7 @@
                                 <span class="sm-st-icon st-blue"><i class="fa fa-list-alt" aria-hidden="true"></i></i></span>
                                 <div class="sm-st-info">
                                     <span>
-                                            <a href = "{{route('outlines.index')}}">Outlines</a>
+                                            <a href = "{{route('lines.index')}}">Outlines</a>
                                     </span>
                                 </div>
                             </div>

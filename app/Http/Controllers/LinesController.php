@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
+use App\Lines;
+use App\outlines;
 use Illuminate\Http\Request;
 
 class LinesController extends Controller
@@ -13,8 +15,11 @@ class LinesController extends Controller
      */
     public function index()
     {
-        $baris = lines::all();
-        return view('lines.index', ,['baris' => $baris])
+        $ide = DB::table('lines')
+                    ->select('*')
+                    ->paginate(2);
+
+        return view('lines.index', ['ide' => $ide]);
     }
 
     /**
@@ -24,7 +29,8 @@ class LinesController extends Controller
      */
     public function create()
     {
-        //
+        $ide = DB::table('outlines')->get();
+        return view('lines.plus',['ide' => $ide]);
     }
 
     /**
@@ -35,7 +41,12 @@ class LinesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $lines = new  Lines;
+        $lines->title = $request->title;
+        $lines->id_outlines = $request->id_outlines;
+        $lines->save();
+
+        return redirect('lines')-> with('message', 'lines telah diupdate');
     }
 
     /**
@@ -46,7 +57,8 @@ class LinesController extends Controller
      */
     public function show($id)
     {
-        //
+        $lines = Lines::find($id);
+        return view('lines.show',compact('lines'));
     }
 
     /**
@@ -57,7 +69,9 @@ class LinesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ide = outlines::get();
+        $lines = Lines::where('id',$id)->first();
+        return view('lines.edit',['lines' => $lines, 'outlines' => $ide,]);
     }
 
     /**
@@ -69,7 +83,15 @@ class LinesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this ->validate($request, [
+            'title' => 'required'
+        ]);        
+
+        $lines = Lines::find($id);
+        $lines->title = $request->title;
+        $lines->save();
+
+        return redirect('lines')-> with('message', 'lines telah diupdate');
     }
 
     /**
@@ -80,6 +102,8 @@ class LinesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $lines =Lines::find($id);
+        $lines->delete();
+        return redirect('/lines');
     }
 }

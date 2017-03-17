@@ -17,4 +17,9 @@ class AdminUser extends User
     {
         $this->notify(new UserAdminResetPasswordNotification($token));
     }
+
+    public function role()
+    {
+        return $this ->belongsToMany(role::class, 'role_admin_users');
+    }
 }

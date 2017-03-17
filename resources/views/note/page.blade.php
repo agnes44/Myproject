@@ -31,7 +31,7 @@
                         <td>{{$note->body}}</td>
                         <td>
                             <button class="edit-modal btn btn-primary" data-id ="{{$note->id}}" data-title ="{{$note->title}}" data-body ="{{$note->body}}"><span class="glyphicon glyphicon-edit"></span> &nbsp; &nbsp; Edit</button>
-                            <button class="delete-modal btn btn-danger" data-id ="{{$note->id}}" data-title ="{{$note->title}}" data-body ="{{$note->body}}"><span class="glyphicon glyphicon-trash"></span>&nbsp; &nbsp;Delete</button>
+                            <button class="delete-modal btn btn-danger" data-id ="{{$note->id}}"><span class="glyphicon glyphicon-trash"></span>&nbsp; &nbsp;Delete</button>
                         </td>
                     </tr>
                 @endforeach

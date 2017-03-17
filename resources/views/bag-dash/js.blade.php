@@ -1,9 +1,9 @@
 <!-- jQuery 2.0.2 -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script src="js/jquery.min.js" type="text/javascript"></script>
-
+        <script type="text/javascript" src="js/bootstrap-material-datetimepicker.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
         <!-- jQuery UI 1.10.3 -->
         <script src="js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
         <!-- Bootstrap -->
@@ -51,6 +51,26 @@
                 // element.parent().parent().parent().addClass('highlight');
                 $(this).parents('li').addClass("task-done");
                 console.log('ok');
+                alert($(this).attr('li'));  //-->this will alert id of checked checkbox.
+                if($(this).prop("checked") ){
+                $.ajax({
+                type: "POST",
+                url: 'todo.blade.php',
+                data: $(this).attr('li'), //--> send id of checked checkbox on other page
+                success: function(data) {
+                    alert('it worked');
+                    alert(data);
+                    $('#container').html(data);
+                },
+                 error: function() {
+                    alert('it broke');
+                },
+                complete: function() {
+                    alert('it completed');
+                }
+            });
+
+            }
             });
             $('input').on('ifUnchecked', function(event) {
                 // var element = $(this).parent().find('input:checkbox:first');
@@ -58,6 +78,10 @@
                 $(this).parents('li').removeClass("task-done");
                 console.log('not');
             });
+
+            $('.input').click(function() {
+            
+      });
 
         </script>
         <script>
@@ -329,7 +353,7 @@ $('.modal-footer').on('click', '.delete', function() {
   $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
       type: 'post',
-      url: '/note/editItem',
+      url: '/outlines/editItem',
       data: {
           '_token': $('input[name=_token]').val(),
           'id': $("#nid").val(),
@@ -349,7 +373,7 @@ $('.modal-footer').on('click', '.delete', function() {
     /*
       jQuery document ready
     */
-    
+    var BASEURL = "{{ url('/') }}";
     $(document).ready(function()
     {
       /*
@@ -388,13 +412,15 @@ $('.modal-footer').on('click', '.delete', function() {
           defaultView option used to define which view to show by default,
           for example we have used agendaWeek.
         */
-        defaultView: 'agendaWeek',
+        defaultView: 'month',
         /*
           selectable:true will enable user to select datetime slot
           selectHelper will add helpers for selectable.
         */
+        navLinks: true,
         selectable: true,
         selectHelper: true,
+        
         /*
           when user select timeslot this option code will execute.
           It has three arguments. Start,end and allDay.
@@ -407,22 +433,11 @@ $('.modal-footer').on('click', '.delete', function() {
           /*
             after selection user will be promted for enter title for event.
           */
-          var title = prompt('Event Title:');
-          /*
-            if title is enterd calendar will add title and event into fullCalendar.
-          */
-          if (title)
-          {
-            calendar.fullCalendar('renderEvent',
-              {
-                title: title,
-                start: start,
-                end: end,
-                allDay: allDay
-              },
-              true // make the event "stick"
-            );
-          }
+          // var title = prompt('Event Title:');
+          start =moment(start).format("YYYY-MM-DD HH:MM:SS");
+          $('#date_start').val(start);
+          $('#responsive-modal').modal('show');
+          
           calendar.fullCalendar('unselect');
         },
         /*
@@ -433,56 +448,13 @@ $('.modal-footer').on('click', '.delete', function() {
           events is the main option for calendar.
           for demo we have added predefined events in json object.
         */
-        events: [
-          {
-            title: 'All Day Event',
-            start: new Date(y, m, 1)
-          },
-          {
-            title: 'Long Event',
-            start: new Date(y, m, d-5),
-            end: new Date(y, m, d-2)
-          },
-          {
-            id: 999,
-            title: 'Repeating Event',
-            start: new Date(y, m, d-3, 16, 0),
-            allDay: false
-          },
-          {
-            id: 999,
-            title: 'Repeating Event',
-            start: new Date(y, m, d+4, 16, 0),
-            allDay: false
-          },
-          {
-            title: 'Meeting',
-            start: new Date(y, m, d, 10, 30),
-            allDay: false
-          },
-          {
-            title: 'Lunch',
-            start: new Date(y, m, d, 12, 0),
-            end: new Date(y, m, d, 14, 0),
-            allDay: false
-          },
-          {
-            title: 'Birthday Party',
-            start: new Date(y, m, d+1, 19, 0),
-            end: new Date(y, m, d+1, 22, 30),
-            allDay: false
-          },
-          {
-            title: 'Click for Google',
-            start: new Date(y, m, 28),
-            end: new Date(y, m, 29),
-            url: 'http://google.com/'
-          }
-        ]
+      
+  
+         events: BASEURL + '/events'
       });
       
     });
-
+    $('.colorpicker').colorpicker();
   </script>
 
 <script type ="text/javascript">
@@ -490,3 +462,44 @@ $('.tree-toggle').click(function () {
   $(this).parent().children('ul.tree').toggle(200);
 });
 </script>
+<<!-- script type ="text/javascript">
+$('.flat-grey list-child').click(function() {
+    alert($(this).attr('id'));  //this will alert id of checked checkbox.
+       if(this.checked){
+            $.ajax({
+                type: "POST",
+                url: 'todo.blade.php',
+                data: $(this).attr('id'), // send id of checked checkbox on other page
+                success: function(data) {
+                    alert('it worked');
+                    alert(data);
+                    $('#container').html(data);
+                },
+                 error: function() {
+                    alert('it broke');
+                },
+                complete: function() {
+                    alert('it completed');
+                }
+            });
+
+            }
+      });
+ /*   $(document).ready(function(){
+        $("input:checkbox").change(function() { 
+            if($(this).is(":checked")) { 
+                $.ajax({
+                    url: '/todo.blade.php',
+                    type: 'POST',
+                    data: { strID:$(this).attr("id"), strState:"1" }
+                });
+            } else {
+                $.ajax({
+                    url: 'todo.blade.php',
+                    type: 'POST',
+                    data: { strID:$(this).attr("id"), strState:"0" }
+                });
+            }
+        }); 
+    });*/
+</script> -->

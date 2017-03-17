@@ -26,7 +26,7 @@ class EventsController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -37,7 +37,15 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $data = new Event();
+        $data->title =$request ->title;
+        $data->start =$request ->date_start . ' ' . $request->time_start;
+        $data->end =$request ->date_end;
+        $data->color =$request ->color;
+
+         $data->save();
+        return redirect('/schedule');
     }
 
     /**
@@ -84,4 +92,5 @@ class EventsController extends Controller
     {
         //
     }
+
 }

@@ -6,8 +6,6 @@
         <form class="form-horizontal" action="/outlines" method ="post">
         {{csrf_field()}}
             <fieldset>
-                <input type="text" name ="title" placeholder="title"> <br \>
-                {{ ($errors -> has('title')) ? $errors->first('title') : ' ' }} <br \><br \>
                 <textarea name="body" id="" cols="40" rows="8" placeholder="isi...."></textarea> <br \>
                 {{ ($errors -> has('body')) ? $errors->first('body') : ' ' }} <br \><br \>
                

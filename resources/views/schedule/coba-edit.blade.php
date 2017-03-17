@@ -1,19 +1,14 @@
-@extends('layout.layout')
-
-@section('contents')
-<div class="task-title">
-    <h3>Full calendar</h3>
-    {{ Form::open(['route' => 'events.store', 'method' => 'post', 'role' => 'form']) }}
+{{ Form::open(['route' => 'events.update', 'method' => 'post', 'role' => 'form']) }}
         <div id="responsive-modal" class="modal fade" tabindex="-1" data-backdrop ="static">
             <div class="modal-dialog">
              <div class="modal-content">
                     <div class="header">
-                        <h4>Tambah Data Event</h4>
+                        <h4>Edit Data Event</h4>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
                             {{ Form::label('title', 'Title') }}
-                            {{ Form::text('title', old('date_start'), ['class' => 'form-control']) }}
+                            {{ Form::text('title', old('date_start'), ['class' => 'form-control'], 'value' => old('date_start') }}
                             {{ ($errors -> has('title')) ? $errors->first('title') : ' ' }}
                         </div>
 
@@ -53,6 +48,3 @@
             </div>
         </div>
     {{ Form::close() }}
-    <div id='calendar'></div>        
-</div>
-@stop

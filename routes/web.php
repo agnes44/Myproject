@@ -48,6 +48,10 @@ Route::get('/tambah',function () {
     return view('outlines/tambah'); 
 });
 
+Route::get('/tambahdata',function () {
+    return view('lines/tambahdata'); 
+});
+
 Route::get('/addItem',function () {
     return view('note/addItem'); 
 });
@@ -73,6 +77,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::resource('note', 'notescontroller');
     Route::resource('outlines', 'outlinescontroller');
     Route::resource('task', 'TasksController');
+    Route::resource('lines', 'LinesController');
     Route::post('/todo/editItem', 'TodoController@editItem');
     Route::post('/todo/deleteItem', 'TodoController@deleteItem');
     Route::post('/schedule/ubah', 'schedulecontroller@ubah');

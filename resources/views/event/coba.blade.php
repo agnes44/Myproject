@@ -2,8 +2,8 @@
 
 @section('contents')
 <div class="task-title">
-    <h3>Full calendar</h3>
-    {{ Form::open(['route' => 'events.store', 'method' => 'post', 'role' => 'form']) }}
+   
+    {{-- {{ Form::open(['route' => 'events.store', 'method' => 'post', 'role' => 'form']) }}
         <div id="responsive-modal" class="modal fade" tabindex="-1" data-backdrop ="static">
             <div class="modal-dialog">
              <div class="modal-content">
@@ -13,7 +13,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             {{ Form::label('title', 'Title') }}
-                            {{ Form::text('title', old('date_start'), ['class' => 'form-control']) }}
+                            {{ Form::text('title', old('title'), ['class' => 'form-control']) }}
                             {{ ($errors -> has('title')) ? $errors->first('title') : ' ' }}
                         </div>
 
@@ -23,11 +23,11 @@
                              {{ ($errors -> has('date_start')) ? $errors->first('date_start') : ' ' }}
                         </div>
     
-                       {{--  <div class="form-group">
+                        <div class="form-group">
                             {{ Form::label('time_start', 'Time Start') }}
                             {{ Form::text('time_start', old('time_start'), ['class' => 'form-control']) }}
                              {{ ($errors -> has('time_start')) ? $errors->first('time_start') : ' ' }}
-                        </div> --}}
+                        </div>
     
                         <div class="form-group">
                             {{ Form::label('date_end', 'Date End') }}
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-    {{ Form::close() }}
+    {{ Form::close() }} --}}
     <div id='calendar'></div>        
 </div>
 @stop

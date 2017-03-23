@@ -1,4 +1,4 @@
- @extends('layout.layout')
+@extends('layout.layout')
 
 @section('contents')
 
@@ -56,20 +56,23 @@
                                     <label for="id" class="control-label col-sm-2">ID : </label>
                                     <div class="col-sm-10">
                                         <input type="text"  name ="id" class="form-control" id="nid" disabled>
+                                       
                                     </div>
                                   </div>
 
                                   <div class="form-group">
                                     <label for="title" class="control-label col-sm-2">Title : </label>
                                     <div class="col-sm-10">
-                                        <input type="name" name="title" class="form-control" id="title">
+                                        <input type="name" name="title" class="form-control" id="title"><br>
+                                         {{ ($errors -> has('title')) ? $errors->first('title') : ' ' }}
                                     </div>
                                   </div>
 
                                   <div class="form-group">
                                     <label for="body" class="control-label col-sm-2">Body : </label>
                                     <div class="col-sm-10">
-                                        <input type="name" name ="body" class="form-control" id="isi">
+                                        <input type="name" name ="body" class="form-control" id="isi"><br>
+                                        {{ ($errors -> has('body')) ? $errors->first('body') : ' ' }}
                                     </div>
                                   </div>
                         </form>

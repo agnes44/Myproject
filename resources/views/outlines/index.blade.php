@@ -8,9 +8,10 @@
             </div>
        </div>          
 </div>
+
 <div class="task-content">
  <ul class="task-list"> 
-        @foreach ($baris as $outlines)
+        @foreach ($ide as $outlines)
             <li>
                 <div class="task-title">
                     <span class="task-title-sp">

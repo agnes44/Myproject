@@ -1,9 +1,7 @@
 <!-- jQuery 2.0.2 -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script src="js/jquery.min.js" type="text/javascript"></script>
-        <script type="text/javascript" src="js/bootstrap-material-datetimepicker.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <!-- jQuery UI 1.10.3 -->
         <script src="js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
         <!-- Bootstrap -->
@@ -17,20 +15,8 @@
 
         <script src="js/plugins/chart.js" type="text/javascript"></script>
 
-        <!-- fullcalender -->
-        <script src="js/moment.min.js" type="text/javascript"></script>
-        <script src="js/fullcalendar.min.js" type="text/javascript"></script>
-        {{-- <script src ="{{ asset('') }}"></script>
-        <script src ="{{ asset('') }}"></script>
-        <script src ="{{ asset('') }}"></script> --}}
-        {{-- {!! Html::script('vendor/calendar/fullcalender/lib/jquery.min.js') !!}
-        {!! Html::script('vendor/calendar/fullcalender/lib/moment.min.js') !!}
-        {!! Html::script('vendor/calendar/fullcalender/fullcalender.mi.js') !!} --}}
-        
-         
-
         <!-- datepicker
-        <script src="js/plugins/datepicker/bootstra  p-datepicker.js" type="text/javascript"></script>-->
+        <script src="js/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>-->
         <!-- Bootstrap WYSIHTML5
         <script src="js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>-->
         <!-- iCheck -->
@@ -46,42 +32,30 @@
 
         <!-- Director for demo purposes -->
         <script type="text/javascript">
-            $('input').on('ifChecked', function(event) {
-                // var element = $(this).parent().find('input:checkbox:first');
-                // element.parent().parent().parent().addClass('highlight');
-                $(this).parents('li').addClass("task-done");
-                console.log('ok');
-                alert($(this).attr('li'));  //-->this will alert id of checked checkbox.
-                if($(this).prop("checked") ){
-                $.ajax({
-                type: "POST",
-                url: 'todo.blade.php',
-                data: $(this).attr('li'), //--> send id of checked checkbox on other page
-                success: function(data) {
-                    alert('it worked');
-                    alert(data);
-                    $('#container').html(data);
-                },
-                 error: function() {
-                    alert('it broke');
-                },
-                complete: function() {
-                    alert('it completed');
-                }
-            });
-
+        $("#test").change(function()
+        {
+            if($(this).prop('checked') == true)
+            {
+                alert("Checked Box Selected");
             }
-            });
-            $('input').on('ifUnchecked', function(event) {
-                // var element = $(this).parent().find('input:checkbox:first');
-                // element.parent().parent().parent().removeClass('highlight');
-                $(this).parents('li').removeClass("task-done");
-                console.log('not');
-            });
+            else
+            {
+                alert("Checked Box deselect");
+            }
+        });
 
-            $('.input').click(function() {
-            
-      });
+            // $('input').on('ifChecked', function(event) {
+            //     // var element = $(this).parent().find('input:checkbox:first');
+            //     // element.parent().parent().parent().addClass('highlight');
+            //     $(this).parents('li').addClass("task-done");
+            //     console.log('ok');
+            // });
+            // $('input').on('ifUnchecked', function(event) {
+            //     // var element = $(this).parent().find('input:checkbox:first');
+            //     // element.parent().parent().parent().removeClass('highlight');
+            //     $(this).parents('li').removeClass("task-done");
+            //     console.log('not');
+            // });
 
         </script>
         <script>
@@ -98,41 +72,40 @@
 </script>
 <script type="text/javascript">
     $(function() {
-            "use strict";
-             //BAR CHART
-            var chart_scope = {};
-            chart_scope.userSessionData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [
-                {
-                    label: "My First dataset",
-                    fillColor: "rgba(220,220,220,0.2)",
-                    strokeColor: "rgba(220,220,220,1)",
-                    pointColor: "rgba(220,220,220,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(220,220,220,1)",
-                    data: [65, 59, 80, 81, 56, 55, 40]
-                },
-                {
-                    label: "My Second dataset",
-                    fillColor: "rgba(151,187,205,0.2)",
-                    strokeColor: "rgba(151,187,205,1)",
-                    pointColor: "rgba(151,187,205,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(151,187,205,1)",
-                    data: [28, 48, 40, 19, 86, 27, 90]
-                }
-     ]
-};
-});
+                "use strict";
+                //BAR CHART
+                var data = {
+                    labels: ["January", "February", "March", "April", "May", "June", "July"],
+                    datasets: [
+                        {
+                            label: "My First dataset",
+                            fillColor: "rgba(220,220,220,0.2)",
+                            strokeColor: "rgba(220,220,220,1)",
+                            pointColor: "rgba(220,220,220,1)",
+                            pointStrokeColor: "#fff",
+                            pointHighlightFill: "#fff",
+                            pointHighlightStroke: "rgba(220,220,220,1)",
+                            data: [65, 59, 80, 81, 56, 55, 40]
+                        },
+                        {
+                            label: "My Second dataset",
+                            fillColor: "rgba(151,187,205,0.2)",
+                            strokeColor: "rgba(151,187,205,1)",
+                            pointColor: "rgba(151,187,205,1)",
+                            pointStrokeColor: "#fff",
+                            pointHighlightFill: "#fff",
+                            pointHighlightStroke: "rgba(151,187,205,1)",
+                            data: [28, 48, 40, 19, 86, 27, 90]
+                        }
+                    ]
+                };
+            
 
-
- 
+            });
             // Chart.defaults.global.responsive = true;
 </script>
-<!--CRUD Todo-->
+
+/<!--CRUD Todo-->
 <script type ="text/javascript">
 
 // Edit Data (Modal and function edit data)
@@ -147,7 +120,9 @@
     $('.deleteContent').hide();
     $('.form-horizontal').show();
     $('#fid').val($(this).data('id'));
+    $('#t').val($(this).data('title'));
     $('#b').val($(this).data('body'));
+    $('#due').val($(this).data('due_date'));
     $('#myModal').modal('show');
 });
   $('.modal-footer').on('click', '.edit', function() {
@@ -157,10 +132,12 @@
       data: {
           '_token': $('input[name=_token]').val(),
           'id': $("#fid").val(),
-          'body': $('#b').val()
+          'title': $('#t').val(),
+          'body': $('#b').val(),
+          'due_date': $('#due').val()
       },
       success: function(data) {
-          $('.item' + data.id).replaceWith("<ul class ='task-list'><li class='item" + data.id + "'><div class='task-checkbox'><input type='checkbox' class='flat-grey list-child'/></div><div class='task-title'><span class='task-title-sp'>" + data.body + "</span><span><button class='edit-modal btn btn-info btn-xs' data-id='" + data.id + "' data-body ='" + data.body + "'><span class='glyphicon glyphicon-edit'></span></button></span><button class='delete-modal btn btn-danger btn-xs' data-id='" + data.id + "' data-body ='" + data.body + "'><span class='glyphicon glyphicon-trash'></span></button></div></li></ul>");
+          $('.item' + data.id).replaceWith("<tr class='item" + data.id + "'><td>" + data.id + "</td><td>" + data.title + "</td><td>" + data.body + "</td><td>" + data.due_date + "</td><td><button class='edit-modal btn btn-info' data-id='" + data.id + "' data-title='" + data.title + "' data-body ='" + data.body + "' data-due_date ='" + data.due_date+ "'><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-title='" + data.title + "' data-body ='" + data.body + "' data-due_date ='" + data.due_date + "'><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
       }
   });
 });
@@ -236,6 +213,20 @@ $('.modal-footer').on('click', '.delete', function() {
         $.ajax({
             type: 'POST',
             url: '/note/deleteItem',
+            data: {
+                '_token': $('input[name=_token]').val(),
+                'id': $('.id').text()
+            },
+            success: function(data) {
+                $('.item' + $('.id').text()).remove();
+            }
+        });
+    });
+
+$('.modal-footer').on('click', '.delete', function() {
+        $.ajax({
+            type: 'POST',
+            url: '/event/deleteItem',
             data: {
                 '_token': $('input[name=_token]').val(),
                 'id': $('.id').text()
@@ -353,7 +344,7 @@ $('.modal-footer').on('click', '.delete', function() {
   $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
       type: 'post',
-      url: '/outlines/editItem',
+      url: '/note/editItem',
       data: {
           '_token': $('input[name=_token]').val(),
           'id': $("#nid").val(),
@@ -368,12 +359,12 @@ $('.modal-footer').on('click', '.delete', function() {
 </script>
 <!--End CRUD Note -->
 
-  <script type="text/javascript">
+<!-- <script type="text/javascript">
     
     /*
       jQuery document ready
     */
-    var BASEURL = "{{ url('/') }}";
+    var BASEURL = "{{-- {{ url('/') }} --}}";
     $(document).ready(function()
     {
       /*
@@ -448,6 +439,40 @@ $('.modal-footer').on('click', '.delete', function() {
           events is the main option for calendar.
           for demo we have added predefined events in json object.
         */
+        drop: function(start,end,allDay)
+        {
+          var originalEventObject = $(this).data('originalEventObject');
+          var copiedEventObject = $.extend({}, originalEventObject);
+          allDay: true,
+          copiedEventObject.start = date;
+          copiedEventObject.allDay = allDay;
+          copiedEventObject.color =color;
+
+          if ($('#drop-remove').is(":checked")) 
+          {
+            $(this).remove();
+          }
+
+          var title = copiedEventObject.title;
+          var start = copiedEventObject.start.format(YYYY-MM-DD);
+
+          csrfToken = document.getElementByName("_token")[0].value;
+          $.ajax({
+            url :'events/update',
+            data: 'title=' + title+'&start=' + start+'&allDay=' +allDay +'&color=' +color,
+            type: POST,
+            headers: {
+              "x-csrf-TOKEN" : csrfToken
+            },
+            success: function(events) {
+              console.log('delete');
+              $('#calendar').fullCalendar('refetchEvents');
+            },
+            error: function(json) {
+              console.log("error");
+            }
+          })
+        },
       
   
          events: BASEURL + '/events'
@@ -461,45 +486,30 @@ $('.modal-footer').on('click', '.delete', function() {
 $('.tree-toggle').click(function () {
   $(this).parent().children('ul.tree').toggle(200);
 });
-</script>
-<<!-- script type ="text/javascript">
-$('.flat-grey list-child').click(function() {
-    alert($(this).attr('id'));  //this will alert id of checked checkbox.
-       if(this.checked){
-            $.ajax({
-                type: "POST",
-                url: 'todo.blade.php',
-                data: $(this).attr('id'), // send id of checked checkbox on other page
-                success: function(data) {
-                    alert('it worked');
-                    alert(data);
-                    $('#container').html(data);
-                },
-                 error: function() {
-                    alert('it broke');
-                },
-                complete: function() {
-                    alert('it completed');
-                }
-            });
-
-            }
-      });
- /*   $(document).ready(function(){
-        $("input:checkbox").change(function() { 
-            if($(this).is(":checked")) { 
-                $.ajax({
-                    url: '/todo.blade.php',
-                    type: 'POST',
-                    data: { strID:$(this).attr("id"), strState:"1" }
-                });
-            } else {
-                $.ajax({
-                    url: 'todo.blade.php',
-                    type: 'POST',
-                    data: { strID:$(this).attr("id"), strState:"0" }
-                });
-            }
-        }); 
-    });*/
 </script> -->
+<script type="text/javascript">
+ $(document).ready(function() {
+  
+var BASEURL = "{{ url('/') }}";
+ 
+ $('#calendar').fullCalendar({
+ weekends: true,
+ header: {
+ left: 'prev,next today',
+ center: 'title',
+ right: 'month,agendaWeek,agendaDay'
+ },
+editable: false,
+navLinks: true,
+selectable: true,
+selectHelper: true, // allow "more" link when too many events
+events: {
+url: BASEURL + '/event',
+ error: function() {
+ alert("load data tidak berhasil");
+ }
+ }
+ });
+ });
+ $('.colorpicker').colorpicker();
+</script>

@@ -91,7 +91,7 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                        {{ Auth::user()->name }} <span class="caret"></span>
+                                        {{ Auth::guard('admin_user')->user()->name }} <span class="caret"></span>
                                     </a>
 
                             <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -130,13 +130,13 @@
                                         <li class="divider"></li>
 
                                         <li>
-                                            <a href="{{ route('logout') }}"
+                                            <a href="{{ url('admin_logout') }}"
                                                 onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
-                                                Logout
+                                                    document.getElementById('logout-form').submit();">
+                                                    Logout
                                             </a>
 
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            <form id="logout-form" action="{{ url('admin_logout') }}" method="POST" style="display: none;">
                                                 {{ csrf_field() }}
                                             </form>
                                         </li>
@@ -157,7 +157,7 @@
                                     <img src="img/26115.jpg" class="img-circle" alt="User Image" />
                                 </div>
                                 <div class="pull-left info">
-                                    <p>{{ Auth::user()->name }}</p>
+                                    <p> {{ Auth::guard('admin_user')->user()->name }} <span class="caret"></p>
 
                                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                                 </div>
@@ -165,7 +165,7 @@
                             <!-- sidebar menu: : style can be found in sidebar.less -->
                             <ul class="sidebar-menu">
                                 <li class="active">
-                                    <a href="home">
+                                    <a href="#">
                                         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                                     </a>
                                 </li>
@@ -196,17 +196,29 @@
                <div class="row" style="margin-bottom:5px;">
 
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="sm-st clearfix">
-                                <span class="sm-st-icon st-red"><i class="fa fa-list" aria-hidden="true"></i></span>
+                                <span class="sm-st-icon st-red"><i class="fa fa-user" aria-hidden="true"></i></span>
                                 <div class="sm-st-info">
                                     <span>
-                                        <a href ="{{route('todo.index')}}">List</a>
+                                        <a href ="#">Anggota</a>
                                     </span>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+
+                         <div class="col-md-3">
+                            <div class="sm-st clearfix">
+                                <span class="sm-st-icon st-blue"><i class="fa fa-list" aria-hidden="true"></i></i></span>
+                                <div class="sm-st-info">
+                                    <span>
+                                            <a href = "{{route('todo.index')}}">List</a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
                             <div class="sm-st clearfix">
                                 <span class="sm-st-icon st-violet"><i class="fa fa-calendar" aria-hidden="true"></i></i></span>
                                 <div class="sm-st-info">
@@ -216,17 +228,8 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="col-md-3">
-                            <div class="sm-st clearfix">
-                                <span class="sm-st-icon st-blue"><i class="fa fa-list-alt" aria-hidden="true"></i></i></span>
-                                <div class="sm-st-info">
-                                    <span>
-                                            <a href = "{{route('lines.index')}}">Outlines</a>
-                                    </span>
-                                </div>
-                            </div>
-                        </div> --}}
-                        <div class="col-md-4">
+                       
+                        <div class="col-md-3">
                             <div class="sm-st clearfix">
                                 <span class="sm-st-icon st-green"><i class="fa fa-quote-left" aria-hidden="true"></i></span>
                                 <div class="sm-st-info">
@@ -246,7 +249,7 @@
                                   &nbsp;
                             </header>
                             <div class="panel-body">
-                               @yield('contents')                              
+                               @yield('kontent')                              
                               </div>
                           </section>
                           </div>

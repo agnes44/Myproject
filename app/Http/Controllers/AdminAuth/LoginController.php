@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin_home';
+    protected $redirectTo = '/admin-home';
 
     /**
      * Create a new controller instance.
@@ -51,11 +51,11 @@ class LoginController extends Controller
 
         $this->clearLoginAttempts($request);
 
-        foreach ($this->guard()->user()->role as role) {
+        foreach ($this->guard()->user()->role as $role) {
             if ($role->name == 'admin') {
-                return redirect('admin/home');
-            } elseif ($role->name == 'siswa') {
-                return redirect('admin/siswa')
+                return redirect('admin-home');
+            }elseif ($role->name == 'siswa') {
+                return redirect('admin-auth/siswa');
             }
         }
     }

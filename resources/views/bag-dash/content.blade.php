@@ -1,10 +1,11 @@
+
 <!-- Main content -->
                 <section class="content">
 
                     <div class="row" style="margin-bottom:5px;">
 
 
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="sm-st clearfix">
                                 <span class="sm-st-icon st-red"><i class="fa fa-list" aria-hidden="true"></i></span>
                                 <div class="sm-st-info">
@@ -14,17 +15,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="sm-st clearfix">
                                 <span class="sm-st-icon st-violet"><i class="fa fa-calendar" aria-hidden="true"></i></i></span>
                                 <div class="sm-st-info">
                                     <span>
-                                          <a href = "{{route('schedule.index')}}">Schedule</a>
+                                          <a href = "{{route('event.index')}}">Schedule</a>
                                     </span>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        {{-- <div class="col-md-3">
                             <div class="sm-st clearfix">
                                 <span class="sm-st-icon st-blue"><i class="fa fa-list-alt" aria-hidden="true"></i></i></span>
                                 <div class="sm-st-info">
@@ -33,8 +34,8 @@
                                     </span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
+                        </div> --}}
+                        <div class="col-md-4">
                             <div class="sm-st clearfix">
                                 <span class="sm-st-icon st-green"><i class="fa fa-quote-left" aria-hidden="true"></i></span>
                                 <div class="sm-st-info">

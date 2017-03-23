@@ -16,7 +16,7 @@ class CreateRoleAdminUsersTable extends Migration
         Schema::create('role_admin_users', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('role_id')->unsigned();
-            $table->integer('admin_id')->unsigned();
+            $table->integer('admin_user_id')->unsigned();
             $table->timestamps();
         });
     }

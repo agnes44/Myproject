@@ -56,6 +56,18 @@ Route::get('/addItem',function () {
     return view('note/addItem'); 
 });
 
+Route::get('/create_event',function () {
+    return view('event/create_event'); 
+});
+
+Route::get('/coba',function () {
+    return view('event/coba'); 
+});
+
+Route::get('/admin-home',function () {
+    return view('admin/admin-home'); 
+});
+
 Route::post('/register','registercontroller@store')->name('register');
 Route::post('/login','logincontroller@store')->name('login');
 Auth::routes();
@@ -71,7 +83,9 @@ Route::get('admin_register', 'AdminAuth\RegisterController@register');
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('/home', 'HomeController@index');
-    Route::get('/admin_home', 'AdminHomeController@index');
+    // Route::get('/admin_home', 'AdminHomeController@index');
+    Route::get('/admin-auth/siswa', 'SiswaController@index');
+    Route::get('/admin-auth/test', 'SiswaController@test');
     Route::resource('todo', 'TodoController');  
     Route::resource('schedule', 'schedulecontroller');
     Route::resource('note', 'notescontroller');
@@ -86,6 +100,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/outlines/deleteItem', 'outlinescontroller@deleteItem');
     Route::post('/note/editItem', 'notescontroller@editItem');
     Route::post('/note/deleteItem', 'notescontroller@deleteItem');
-    Route::resource('events', 'EventsController',['only' => ['index', 'store']]);
+    /*Route::resource('events', 'EventsController',['only' => ['index', 'store']]);
+    Route::resource('events', 'EventsController',['only' => ['index', 'update']]);*/
+    Route::resource('event', 'EventsController');
+     Route::post('/event/deleteItem', 'EventsController@deleteItem');
 });
     

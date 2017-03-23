@@ -14,9 +14,9 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $data = Event::all();
-        return Response()->json($data);
-
+        // $events = event::all();
+        // return view('event.list',compact('events'));
+        return view('event/list', ['events' => Event::orderBy('start')->get()]);
     }
 
     /**
@@ -26,7 +26,7 @@ class EventsController extends Controller
      */
     public function create()
     {
-        
+        return view('event/create');
     }
 
     /**
@@ -38,14 +38,26 @@ class EventsController extends Controller
     public function store(Request $request)
     {
         
-        $data = new Event();
-        $data->title =$request ->title;
-        $data->start =$request ->date_start . ' ' . $request->time_start;
-        $data->end =$request ->date_end;
-        $data->color =$request ->color;
+        // $data = new Event();
+        // $data->title =$request ->title;
+        // $data->start =$request ->date_start . ' ' . $request->time_start;
+        // $data->end =$request ->date_end;
+        // $data->color =$request ->color;
 
-         $data->save();
-        return redirect('/schedule');
+        //  $data->save();
+        // return redirect('/schedule');
+
+        $time = explode(" - ", $request->input('time'));
+  
+         $event = new event();
+         $event->title = $request->input('title');
+         $event->start =$request ->start;
+         $event->end =$request ->end;
+         $event->color = $request->color;
+         $event->save();
+          
+         $request->session()->flash('success', 'The event was successfully saved!');
+         return redirect('/event');
     }
 
     /**
@@ -56,7 +68,7 @@ class EventsController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('event/show', ['event' => Event::findOrFail($id)]);
     }
 
     /**
@@ -67,7 +79,7 @@ class EventsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('event/edit', ['event' => Event::findOrFail($id)]);
     }
 
     /**
@@ -79,7 +91,17 @@ class EventsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $time = explode(" - ", $request->input('time'));
+  
+         $event = Event::find($id);
+         $event->title = $request->input('title');
+         $event->start =$request ->start;
+         $event->end =$request ->end;
+         $event->color = $request->color;
+         $event->save();
+          
+         $request->session()->flash('success', 'The event was successfully saved!');
+         return redirect('/event');
     }
 
     /**
@@ -90,7 +112,16 @@ class EventsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $event = Event::find($id);
+        $event->delete();
+          
+        return redirect('events');
+    }
+
+    public function deleteItem(Request $req)
+    {
+        Event::find($req->id)->delete();
+        return response()->json();
     }
 
 }

@@ -4,11 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\todo;
-use Validator;
-use Response;
-use App\Http\Requests\todo\addItem;
-use App\Http\Requests\todo\editItem;
-use Illuminate\Supprot\Facades\Input;
 class TodoController extends Controller
 {
     /**
@@ -18,8 +13,8 @@ class TodoController extends Controller
      */
     public function index()
     {
-        $todos =todo::all();
-        return view('todo.index',['todos' => $todos]);
+         $todos =todo::all();
+         return view('todo.index',compact('todos'));
     }
 
     /**
@@ -43,7 +38,8 @@ class TodoController extends Controller
         $this ->validate($request, [
             'body' => 'required'
         ]);
-
+        $todo=$request->all();
+        dd($todo);
         $todo = new todo;
         $todo->body = $request->body;
 
@@ -60,8 +56,8 @@ class TodoController extends Controller
      */
     public function show($id)
     {
-       $item = todo::find($id);
-       return view('todo.single',compact('item'));
+       $todo = todo::find($id);
+       return view('todo.single',compact('todo'));
        /*return view('todos.single')->with('todos', $todo); */               
     }
 
@@ -73,8 +69,9 @@ class TodoController extends Controller
      */
     public function edit($id)
     {
-         $item = todo::find($id);
-         return view('todo.edit',compact('item'));
+         $todo = todo::find($id);
+         return view('todo.edit',compact('todo'));
+
     }
 
     /**
@@ -89,14 +86,12 @@ class TodoController extends Controller
          $this ->validate($request, [
             'body' => 'required'
         ]);
-
         $todo = todo::find($id);
         $todo->body = $request->body;
         
         $todo->save();
-        return redirect('todo')-> with('message', 'todo telah diedit');
 
-        //return response()->json($todo);
+        return redirect('todo')-> with('message', 'todo telah diedit');
     }
 
     /**
@@ -107,22 +102,15 @@ class TodoController extends Controller
      */
     public function destroy($id)
     {
-        $item =todo::find($id);
-        $item->delete();
+        $todo =todo::find($id);
+        $todo->delete();
         return redirect('/todo');
     }
 
-    public function editItem(Request $req) {
-        $todo = todo::findOrfail($req->id);
-        $todo->body = $req->body;
-
-        $todo->save();
-        return response ()->json ($todo);
-    }
-
-    public function deleteItem(Request $req)
+    public function check()
     {
-        todo::find($req->id)->delete();
-        return response()->json();
+         if( $request->has('test') ){
+            true;
+        }
     }
 }

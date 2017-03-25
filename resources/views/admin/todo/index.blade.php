@@ -1,10 +1,10 @@
- @extends('layout.layout')
+ @extends('layout.desain')
 
-@section('contents')
+@section('kontent')
 <div class="form-group row add">
        <div class="form-group">
             <div class="col-md-2" >
-                 <a href="/todo/create" class ="btn btn-info">Add New</a>
+                 <a href="create" class ="btn btn-info">Add New</a>
             </div>
        </div>          
 </div>

@@ -8,18 +8,18 @@
         {{method_field('PUT')}}
             <fieldset>
                 <input type="text" name ="title" placeholder="title" class="form-control" value="{{$event->title}}">
-                <br \>
-                {{ ($errors -> has('title')) ? $errors->first('title') : ' ' }} 
+                <br \><br \>
                 <input type="date" name ="start" placeholder="date_start" class="form-control" value="{{$event->start}}">
-                <br \>
-                {{ ($errors -> has('start')) ? $errors->first('start') : ' ' }} 
+                <br \><br \>
                 <input type="date" name ="end" placeholder="end_start" class="form-control" value="{{$event->end}}">
-                <br \>
-                {{ ($errors -> has('end')) ? $errors->first('end') : ' ' }} 
+                <br \><br \>
+                <div class="form-group">
+                <div class="input-group demo2 colorpicker-element">
                 <input type="text" name ="color" placeholder="color" class="form-control" value="{{$event->color}}">
-                <br \>
-                {{ ($errors -> has('color')) ? $errors->first('color') : ' ' }} 
-
+                <span class ="input-group-addon"><i></i></span>
+                 </div>
+                 </div>
+                <br \><br \>
                 <button type="submit" class ="btn btn-success">Submit</button>
                    
             </fieldset>

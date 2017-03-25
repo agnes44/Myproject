@@ -13,96 +13,66 @@
 
 Route::get('/', function () {
     return view('halaman/main');
-});/*
-Route::get('/dashboard', function () {
-    return view('page/dashboard');
 });
-<Route::get('/main',function () {
-    return view('halaman/main');
-}); */
 Route::get('/about',function () {
     return view('halaman/about');
 });
-
-Route::get('/login',function () {
-    return view('halaman/login');
-});
-
-Route::get('/sign',function () {
-    return view('halaman/sign');
-});
-
-Route::get('/create',function () {
-    return view('todo/create'); 
-});
-
-Route::get('/plus',function () {
-    return view('task/plus'); 
-});
-
-Route::get('/add',function () {
-    return view('schedule/add'); 
-});
-
-Route::get('/tambah',function () {
-    return view('outlines/tambah'); 
-});
-
-Route::get('/tambahdata',function () {
-    return view('lines/tambahdata'); 
-});
-
-Route::get('/addItem',function () {
-    return view('note/addItem'); 
-});
-
 Route::get('/create_event',function () {
     return view('event/create_event'); 
 });
 
-Route::get('/coba',function () {
-    return view('event/coba'); 
-});
-
-Route::get('/admin-home',function () {
-    return view('admin/admin-home'); 
-});
-
-Route::post('/register','registercontroller@store')->name('register');
-Route::post('/login','logincontroller@store')->name('login');
-Auth::routes();
-Route::get('admin_login', 'AdminAuth\logincontroller@showLoginForm');
-Route::post('admin_login', 'AdminAuth\logincontroller@login');
-Route::post('admin_logout', 'AdminAuth\logincontroller@logout');
-Route::post('admin_password/email', 'AdminAuth\ForgotPasswordController@sendResetLinkEmail');
-Route::get('admin_password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm');
-Route::post('admin_password/reset', 'AdminAuth\ResetPasswordController@reset');
-Route::get('admin_password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
-Route::get('admin_register', 'AdminAuth\RegisterController@showRegistrationForm');
-Route::get('admin_register', 'AdminAuth\RegisterController@register');
-
 Route::group(['middleware' => ['web']], function () {
-    Route::get('/home', 'HomeController@index');
-    // Route::get('/admin_home', 'AdminHomeController@index');
-    Route::get('/admin-auth/siswa', 'SiswaController@index');
-    Route::get('/admin-auth/test', 'SiswaController@test');
-    Route::resource('todo', 'TodoController');  
-    Route::resource('schedule', 'schedulecontroller');
-    Route::resource('note', 'notescontroller');
-    Route::resource('outlines', 'outlinescontroller');
-    Route::resource('task', 'TasksController');
-    Route::resource('lines', 'LinesController');
+    Route::resource('todo', 'TodoController');
     Route::post('/todo/editItem', 'TodoController@editItem');
     Route::post('/todo/deleteItem', 'TodoController@deleteItem');
-    Route::post('/schedule/ubah', 'schedulecontroller@ubah');
-    Route::post('/schedule/deleteItem', 'schedulecontroller@deleteItem');
-    Route::post('/outlines/editItem', 'outlinescontroller@editItem');
-    Route::post('/outlines/deleteItem', 'outlinescontroller@deleteItem');
+    Route::post('/todo/create', 'TodoController@create');
+    Route::get('/todo/{id}/edit', 'TodoController@edit');
+    Route::patch('/todo/{id}/update', 'TodoController@update');
+    Route::resource('task', 'TasksController');
+    Route::post('/task/create', 'TasksController@create');
+    Route::get('/task/{id}/edit', 'TasksController@edit');
+    Route::patch('/task/{id}/update', 'TasksController@update');
+});
+
+Route::group(['middleware' => ['web']], function (){
+    Route::post('/register','registercontroller@store')->name('register');
+    Route::post('/login','logincontroller@store')->name('login');
+    Auth::routes();
+    Route::get('admin_login', 'AdminAuth\logincontroller@showLoginForm');
+    Route::post('admin_login', 'AdminAuth\logincontroller@login');
+    Route::post('admin_logout', 'AdminAuth\logincontroller@logout');
+    Route::post('admin_password/email', 'AdminAuth\ForgotPasswordController@sendResetLinkEmail');
+    Route::get('admin_password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm');
+    Route::post('admin_password/reset', 'AdminAuth\ResetPasswordController@reset');
+    Route::get('admin_password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
+    Route::get('admin_register', 'AdminAuth\RegisterController@showRegistrationForm');
+    Route::get('admin_register', 'AdminAuth\RegisterController@register');
+});
+
+Route::get('/addItem', function () {
+    return view('note/addItem');
+});
+Route::get('/adduser', function () {
+    return view('admin/anggota/adduser');
+});
+
+
+Route::group(['middleware' => ['web']], function () {
+    Route::resource('note', 'notescontroller');
     Route::post('/note/editItem', 'notescontroller@editItem');
     Route::post('/note/deleteItem', 'notescontroller@deleteItem');
-    /*Route::resource('events', 'EventsController',['only' => ['index', 'store']]);
-    Route::resource('events', 'EventsController',['only' => ['index', 'update']]);*/
     Route::resource('event', 'EventsController');
-     Route::post('/event/deleteItem', 'EventsController@deleteItem');
+    Route::post('/event/deleteItem', 'EventsController@deleteItem');
+    Route::get('/event/coba','EventsController@coba');
+    Route::get('/home', 'HomeController@index');
 });
+
+ Route::group(['middleware' => ['web']], function () {
+    Route::get('/admin-auth/siswa', 'SiswaController@index');
+    Route::get('/admin-auth/test', 'SiswaController@test');
+    Route::get('/admin-home','AdminHomeController@index');
+    Route::resource('anggota', 'AnggotaController');
+    //Route::post('/admin/anggota','AnggotaController@store');
+ });
+
     

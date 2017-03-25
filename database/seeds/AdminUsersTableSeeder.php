@@ -12,7 +12,7 @@ class AdminUsersTableSeeder extends Seeder
      */
     public function run()
     {
-       $user = new AdminUser();
+        $user = new AdminUser();
         $user->name = "Carolina ";
         $user->email = "carolina@test.com";
         $user->password = crypt("carolina", "");

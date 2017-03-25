@@ -30,7 +30,7 @@ class notescontroller extends Controller
      */
     public function create()
     {
-        return view('note.addItem');
+        return view('note/addItem');
     }
 
     /**

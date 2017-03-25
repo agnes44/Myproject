@@ -157,7 +157,7 @@
                                     <img src="img/26115.jpg" class="img-circle" alt="User Image" />
                                 </div>
                                 <div class="pull-left info">
-                                    <p> {{ Auth::guard('admin_user')->user()->name }} <span class="caret"></p>
+                                    <p> {{ Auth::guard('admin_user')->user()->name }}</p>
 
                                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                                 </div>
@@ -201,7 +201,7 @@
                                 <span class="sm-st-icon st-red"><i class="fa fa-user" aria-hidden="true"></i></span>
                                 <div class="sm-st-info">
                                     <span>
-                                        <a href ="#">Anggota</a>
+                                        <a href ="/anggota">Anggota</a>
                                     </span>
                                 </div>
                             </div>

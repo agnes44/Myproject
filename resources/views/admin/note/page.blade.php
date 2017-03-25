@@ -5,7 +5,7 @@
 <div class="form-group row add">
        <div class="form-group">
             <div class="col-md-2" >
-                 <a href="/addItem" class ="btn btn-info">Add New</a>
+                 <a href="addItem" class ="btn btn-info">Add New</a>
             </div>
        </div>
                

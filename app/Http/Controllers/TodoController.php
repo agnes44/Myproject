@@ -38,8 +38,8 @@ class TodoController extends Controller
         $this ->validate($request, [
             'body' => 'required'
         ]);
-        $todo=$request->all();
-        dd($todo);
+        // $todo=$request->all();
+        // dd($todo);
         $todo = new todo;
         $todo->body = $request->body;
 

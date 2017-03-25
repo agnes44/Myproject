@@ -1,11 +1,10 @@
-@extends('layout.layout')
+@extends('layout.desain')
 
-@section('contents')
-
+@section('kontent')
 <div class="form-group row add">
        <div class="form-group">
             <div class="col-md-2" >
-                 <a href="/addItem" class ="btn btn-info">Add New</a>
+                 <a href="/adduser" class ="btn btn-info">Add New</a>
             </div>
        </div>
                
@@ -17,21 +16,25 @@
             <table class="table table-borderless" id ="table">
                 <tr>
                     <th>No.</th>
-                    <th>Title</th>
-                    <th>Body</th>
+                    <th>Username</th>
+                    <th>Email</th>
                     <th>Action</th>
                 </tr>
                 {{ csrf_field() }}
 
                 <?php $no=1; ?>
-                @foreach ($catatan as $note)
-                    <tr class="item{{$note->id}}">
+                @foreach ($users as $user)
+                    <tr class="item{{$user->id}}">
                         <td>{{$no++}}</td>
-                        <td>{{($note->title)}}</td>
-                        <td>{{$note->body}}</td>
+                        <td>{{($user->name)}}</td>
+                        <td>{{$user->email}}</td>
                         <td>
-                            <button class="edit-modal btn btn-primary" data-id ="{{$note->id}}" data-title ="{{$note->title}}" data-body ="{{$note->body}}"><span class="glyphicon glyphicon-edit"></span> &nbsp; &nbsp; Edit</button>
-                            <button class="delete-modal btn btn-danger" data-id ="{{$note->id}}"><span class="glyphicon glyphicon-trash"></span>&nbsp; &nbsp;Delete</button>
+                            {{-- <button class="edit-modal btn btn-primary" data-id ="{{$user->id}}"><span class="glyphicon glyphicon-edit"></span> &nbsp; &nbsp; Edit</button> --}}
+                            <form method ="post" action ="{{'/anggota/'.$user->id}}" class="pull-left hidden-phone">
+                            {{csrf_field()}}
+                            {{method_field('DELETE')}}
+                            <button class="delete-modal btn btn-danger" data-id ="{{$user->id}}"><span class="glyphicon glyphicon-trash"></span>&nbsp; &nbsp;Delete</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

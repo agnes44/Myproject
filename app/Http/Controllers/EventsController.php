@@ -26,7 +26,7 @@ class EventsController extends Controller
      */
     public function create()
     {
-        return view('event/create');
+        return view('event/create_event');
     }
 
     /**
@@ -49,7 +49,7 @@ class EventsController extends Controller
 
         $time = explode(" - ", $request->input('time'));
   
-         $event = new event();
+         $event = new Event();
          $event->title = $request->input('title');
          $event->start =$request ->start;
          $event->end =$request ->end;
@@ -124,4 +124,8 @@ class EventsController extends Controller
         return response()->json();
     }
 
+    public function coba()
+    {
+        return view('event/coba');
+    }
 }

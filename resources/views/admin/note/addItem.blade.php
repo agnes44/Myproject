@@ -1,7 +1,7 @@
-@extends('layouts.layouts')
+@extends('layout.layout')
 
-@section('content')
-<a href="/note/addItem" class ="btn btn-info">Back</a>
+@section('contents')
+<a href="/note" class ="btn btn-info">Back</a>
 <div class="col-lg-4">
         <form class="form-horizontal" action="/note" method ="post">
         {{csrf_field()}}

@@ -191,12 +191,12 @@ $('.modal-footer').on('click', '.delete', function() {
         });
     });
 
-// Delete  Outlines
+// Delete  Admin Todo
 
 $('.modal-footer').on('click', '.delete', function() {
         $.ajax({
             type: 'POST',
-            url: '/outlines/deleteItem',
+            url: '/admintodo/deleteItem',
             data: {
                 '_token': $('input[name=_token]').val(),
                 'id': $('.id').text()
@@ -236,6 +236,21 @@ $('.modal-footer').on('click', '.delete', function() {
             }
         });
     });
+
+$('.modal-footer').on('click', '.delete', function() {
+        $.ajax({
+            type: 'POST',
+            url: '/anggota/deleteItem',
+            data: {
+                '_token': $('input[name=_token]').val(),
+                'id': $('.id').text()
+            },
+            success: function(data) {
+                $('.item' + $('.id').text()).remove();
+            }
+        });
+    });
+</script>
 </script>
 
 <!--End CRUD Todo-->
@@ -352,7 +367,7 @@ $('.modal-footer').on('click', '.delete', function() {
           'body': $('#isi').val()
 },
       success: function(data) {
-          $('.item' + data.id).replaceWith("<tr class='item" + data.id + "'><td>" + data.id + "</td><td>" + data.title + "</td><td>" + data.body + "</td><td><button class='edit-modal btn btn-info' data-id='" + data.id + "' data-title='" + data.title + "' data-body='" + data.body + "'><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-title='" + data.title + "' data-body='" + data.body + "'><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
+          $('.item' + data.id).replaceWith("<tr class='item" + data.id + "'><td>" + data.title + "</td><td>" + data.body + "</td><td><button class='edit-modal btn btn-info' data-title='" + data.title + "' data-body='" + data.body + "'><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-title='" + data.title + "' data-body='" + data.body + "'><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
       }
   });
 });
@@ -504,7 +519,7 @@ navLinks: true,
 selectable: true,
 selectHelper: true, // allow "more" link when too many events
 events: {
-url: BASEURL + '/event',
+events: BASEURL + '/events',
  error: function() {
  alert("load data tidak berhasil");
  }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\todo\deleteItem;
 use App\todo;
 class TodoController extends Controller
 {
@@ -56,8 +57,8 @@ class TodoController extends Controller
      */
     public function show($id)
     {
-       $todo = todo::find($id);
-       return view('todo.single',compact('todo'));
+       // $todo = todo::find($id);
+       // return view('todo.single',compact('todo'));
        /*return view('todos.single')->with('todos', $todo); */               
     }
 
@@ -105,6 +106,12 @@ class TodoController extends Controller
         $todo =todo::find($id);
         $todo->delete();
         return redirect('/todo');
+    }
+
+    public function deleteItem(Request $req)
+    {
+        todo::find($req->id)->delete();
+        return response()->json();
     }
 
     public function check()

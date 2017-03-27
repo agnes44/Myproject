@@ -1,7 +1,7 @@
-@extends('layout.layout')
+@extends('layouts.layouts')
 
-@section('contents')
-<a href="/task" class ="btn btn-info">Back</a>
+@section('content')
+<a href="/admintask" class ="btn btn-info">Back</a>
 <div class="col-lg-4 col-lg-offset-4">
     <h3>Edit</h3>
         <form class="form-horizontal" action="{{'/task/'.$tasks->id}}" method ="post">

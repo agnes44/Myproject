@@ -1,9 +1,9 @@
-@extends('layout.layout')
+@extends('layouts.layouts')
 
-@section('contents')
-<a href="/note" class ="btn btn-info">Back</a>
+@section('content')
+<a href="/adminnote" class ="btn btn-info">Back</a>
 <div class="col-lg-4">
-        <form class="form-horizontal" action="/note" method ="post">
+        <form class="form-horizontal" action="{{ route('adminnote.store') }}" method ="post">
         {{csrf_field()}}
             <fieldset>
                 <input type="text" name ="title" placeholder="title" > <br \>

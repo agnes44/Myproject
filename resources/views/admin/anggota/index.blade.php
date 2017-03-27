@@ -30,11 +30,7 @@
                         <td>{{$user->email}}</td>
                         <td>
                             {{-- <button class="edit-modal btn btn-primary" data-id ="{{$user->id}}"><span class="glyphicon glyphicon-edit"></span> &nbsp; &nbsp; Edit</button> --}}
-                            <form method ="post" action ="{{'/anggota/'.$user->id}}" class="pull-left hidden-phone">
-                            {{csrf_field()}}
-                            {{method_field('DELETE')}}
                             <button class="delete-modal btn btn-danger" data-id ="{{$user->id}}"><span class="glyphicon glyphicon-trash"></span>&nbsp; &nbsp;Delete</button>
-                            </form>
                         </td>
                     </tr>
                 @endforeach
@@ -81,7 +77,7 @@
                         </form>
                             
                             <div class="deleteContent">
-                                Are you sure you want to delete <span class="title"></span> ?
+                                Are you sure you want to delete this akun <span class="title"></span> ?
                                 <span class="hidden id"></span>
                             </div>
 

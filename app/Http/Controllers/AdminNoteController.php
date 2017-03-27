@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use DB;
+
 use Illuminate\Http\Request;
-use App\Tasks;
-use App\todo;
-class TasksController extends Controller
+use App\note;
+class AdminNoteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,14 +13,8 @@ class TasksController extends Controller
      */
     public function index()
     {
-
-        $todos = DB::table('todos')
-                    ->select('*')
-                    ->paginate(1);
-
-        return view('task.index', [
-            'todos' => $todos,
-        ]);
+        $adminnote = note::all();
+        return view('admin.adminnote.page')->with('adminnote', $adminnote);
     }
 
     /**
@@ -31,8 +24,7 @@ class TasksController extends Controller
      */
     public function create()
     {
-        $todos = DB::table('todos')->get();
-        return view('task.plus',['todos' => $todos]);
+         return view('admin.adminnote.addItem');
     }
 
     /**
@@ -43,13 +35,19 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        $task = new  Tasks;
-        $task->title = $request->title;
-        $task->due_date = $request->due_date;
-        $task->id_todos = $request->id_todos;
-        $task->save();
+        $this ->validate($request, [
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+        // $adminnote=$request->all();
+        // dd($adminnote);
+        $adminnote = new note;
+        $adminnote->title = $request->title;
+        $adminnote->body = $request->body;
 
-        return redirect('task')-> with('message', 'task telah diupdate');
+        $adminnote->save();
+
+        return redirect('adminnote')-> with('message', 'note telah ditambahkan');
     }
 
     /**
@@ -60,8 +58,7 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-        // $item = Tasks::find($id);
-        // return view('task.show',compact('item'));
+        //
     }
 
     /**
@@ -72,12 +69,8 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
-        $todos = todo::get();
-        $task = Tasks::where('id',$id)->first();
-        return view('task.edit',[
-                    'tasks' => $task,
-                    'todos' => $todos
-            ]);
+         $adminnote = note::find($id);
+         return view('admin/adminnote.edit',compact('adminnote'));
     }
 
     /**
@@ -89,15 +82,15 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $this ->validate($request, [
-            'title' => 'required'
-        ]);        
+        $this ->validate($request, [
+            'body' => 'required'
+        ]);
+        $adminnote = note::find($id);
+        $adminnote->body = $request->body;
+        
+        $adminnote->save();
 
-        $task = Tasks::find($id);
-        $task->title = $request->title;
-        $task->save();
-
-        return redirect('task')-> with('message', 'tasks telah diupdate');
+        return redirect('adminnote')-> with('message', 'note telah diedit');
     }
 
     /**
@@ -106,10 +99,9 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+   public function deleteItem(Request $req)
     {
-        $item =Tasks::find($id);
-        $item->delete();
-        return redirect('/task');
+        note::find($req->id)->delete();
+        return response()->json();
     }
 }

@@ -1,6 +1,6 @@
-@extends('layout.layout')
+@extends('layout.desain')
 
-@section('contents')
+@section('kontent')
 <div class="task-title">
    
     {{-- {{ Form::open(['route' => 'events.store', 'method' => 'post', 'role' => 'form']) }}

@@ -47,7 +47,7 @@ class EventsController extends Controller
         //  $data->save();
         // return redirect('/schedule');
 
-        $time = explode(" - ", $request->input('time'));
+         $time = explode(" - ", $request->input('time'));
   
          $event = new Event();
          $event->title = $request->input('title');

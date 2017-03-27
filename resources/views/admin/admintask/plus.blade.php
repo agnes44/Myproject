@@ -1,6 +1,6 @@
-@extends('layout.layout')
+@extends('layouts.layouts')
 
-@section('contents')
+@section('content')
 <div class="col-lg-4 ">
         <form class="form-horizontal" action="/task" method ="post">
         {{csrf_field()}}

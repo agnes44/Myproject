@@ -1,6 +1,6 @@
- @extends('layout.layout')
+ @extends('layout.desain')
 
-@section('contents')
+@section('kontent')
 
  <nav class="navbar navbar-default">
          <div class="container-fluid">
@@ -18,7 +18,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/create_event">Add New Event <span class="sr-only">(current)</span></a></li>
-                    <li><a href="coba">FullCalendar</a></li>
+                    {{-- <li><a href="coba">FullCalendar</a></li> --}}
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -39,7 +39,7 @@
                 {{ csrf_field() }}
 
                 <?php $no=1; ?>
-                @foreach ($events as $event)
+                @foreach ($adminevent as $event)
                     <tr class="item{{$event->id}}">
                         <td>{{$no++}}</td>
                         <td>{{($event->title)}}</td>
@@ -47,7 +47,7 @@
                         <td>{{$event->end}}</td>
                         <td>{{$event->color}}</td>
                         <td>
-                        <a href="{{'/event/'.$event->id.'/edit'}}">
+                        <a href="{{'/adminevent/'.$event->id.'/edit'}}">
                              <button class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> &nbsp; &nbsp; Edit</button>
                         </a>
                              {{csrf_field()}}

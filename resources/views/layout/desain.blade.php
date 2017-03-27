@@ -212,7 +212,7 @@
                                 <span class="sm-st-icon st-blue"><i class="fa fa-list" aria-hidden="true"></i></i></span>
                                 <div class="sm-st-info">
                                     <span>
-                                            <a href = "{{route('todo.index')}}">List</a>
+                                            <a href = "{{route('admintodo.index')}}">List</a>
                                     </span>
                                 </div>
                             </div>
@@ -223,7 +223,7 @@
                                 <span class="sm-st-icon st-violet"><i class="fa fa-calendar" aria-hidden="true"></i></i></span>
                                 <div class="sm-st-info">
                                     <span>
-                                          <a href = "{{route('event.index')}}">Schedule</a>
+                                          <a href = "{{route('adminevent.index')}}">Schedule</a>
                                     </span>
                                 </div>
                             </div>
@@ -234,7 +234,7 @@
                                 <span class="sm-st-icon st-green"><i class="fa fa-quote-left" aria-hidden="true"></i></span>
                                 <div class="sm-st-info">
                                     <span>
-                                          <a href = "{{route('note.index')}}">Note</a>
+                                          <a href = "{{route('adminnote.index')}}">Note</a>
                                     </span>
                                 </div>
                             </div>

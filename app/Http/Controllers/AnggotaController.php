@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\User\deleteItem;
 use App\User;
 use Validator;
 class AnggotaController extends Controller
@@ -42,5 +43,11 @@ class AnggotaController extends Controller
         $user =User::find($id);
         $user->delete();
         return redirect('/anggota');
+    }
+
+     public function deleteItem(Request $req)
+    {
+        User::find($req->id)->delete();
+        return response()->json();
     }
 }   

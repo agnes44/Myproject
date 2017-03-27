@@ -1,11 +1,11 @@
-@extends('layout.layout')
+@extends('layout.desain')
 
-@section('contents')
+@section('kontent')
 
 <div class="form-group row add">
        <div class="form-group">
             <div class="col-md-2" >
-                 <a href="addItem" class ="btn btn-info">Add New</a>
+                 <a href="/addItem" class ="btn btn-info">Add New</a>
             </div>
        </div>
                
@@ -16,7 +16,6 @@
         <div class="table-responsive">
             <table class="table table-borderless" id ="table">
                 <tr>
-                    <th>No.</th>
                     <th>Title</th>
                     <th>Body</th>
                     <th>Action</th>
@@ -24,9 +23,8 @@
                 {{ csrf_field() }}
 
                 <?php $no=1; ?>
-                @foreach ($catatan as $note)
+                @foreach ($adminnote as $note)
                     <tr class="item{{$note->id}}">
-                        <td>{{$no++}}</td>
                         <td>{{($note->title)}}</td>
                         <td>{{$note->body}}</td>
                         <td>
@@ -63,7 +61,7 @@
                                   <div class="form-group">
                                     <label for="title" class="control-label col-sm-2">Title : </label>
                                     <div class="col-sm-10">
-                                        <input type="name" name="title" class="form-control" id="title"><br>
+                                        <input type="name" name="title" class="form-control" id="title" required="required"><br>
                                          {{ ($errors -> has('title')) ? $errors->first('title') : ' ' }}
                                     </div>
                                   </div>
@@ -71,7 +69,7 @@
                                   <div class="form-group">
                                     <label for="body" class="control-label col-sm-2">Body : </label>
                                     <div class="col-sm-10">
-                                        <input type="name" name ="body" class="form-control" id="isi"><br>
+                                        <input type="name" name ="body" class="form-control" id="isi" required="required"><br>
                                         {{ ($errors -> has('body')) ? $errors->first('body') : ' ' }}
                                     </div>
                                   </div>

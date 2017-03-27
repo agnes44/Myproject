@@ -1,10 +1,10 @@
- @extends('layout.layout')
+ @extends('layout.desain')
 
- @section('contents')
- <a href="/plus" class ="btn btn-info">Create todo</a> <br \><br \>
+ @section('kontent')
+ <a href="/admintask/plus" class ="btn btn-info">Create todo</a> <br \><br \>
 
 <ul class="task-list"> 
-        @foreach ($todos as $todo)
+        @foreach ($admintodo as $todo)
                 <div class="todo-title">
                     <h4>{{($todo->body)}}</h4>
                 </div>

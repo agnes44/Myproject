@@ -1,8 +1,8 @@
-@extends('layout.desain')
+@extends('layouts.layouts')
 
-@section('kontent')
+@section('content')
 <div class="col-lg-4 ">
-        <form class="form-horizontal" action="/todo" method ="post">
+        <form class="form-horizontal" action="{{ route('admintodo.store') }}" method ="post">
         {{csrf_field()}}
              <input type="text" class ="form-control" id ="body" name ="body" placeholder="Your body here" required="required">
                  {{ ($errors -> has('body')) ? $errors->first('body') : ' ' }} <br \><br \> 

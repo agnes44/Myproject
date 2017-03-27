@@ -9,7 +9,7 @@
             <input type="date" name ="due_date" placeholder="" class="form-control"><br \>
             <select name="id_todos">
                 <option>--Pilih ID Todo </option>
-                @foreach ($task as $todo)
+                @foreach ($todos as $todo)
                     <option value="{{ $todos->id_todos }}">{{ $todos->nama }}</option>
                 @endforeach
             </select>

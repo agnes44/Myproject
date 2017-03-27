@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use DB;
+
 use Illuminate\Http\Request;
-use App\Tasks;
+use App\Http\Requests\admintodo\deleteItem;
 use App\todo;
-class TasksController extends Controller
+class AdminTodoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,14 +14,9 @@ class TasksController extends Controller
      */
     public function index()
     {
+        $admintodo = todo::all();
+        return view('admin.admintodo.index')->with('admintodo', $admintodo);
 
-        $todos = DB::table('todos')
-                    ->select('*')
-                    ->paginate(1);
-
-        return view('task.index', [
-            'todos' => $todos,
-        ]);
     }
 
     /**
@@ -31,8 +26,7 @@ class TasksController extends Controller
      */
     public function create()
     {
-        $todos = DB::table('todos')->get();
-        return view('task.plus',['todos' => $todos]);
+         return view('admin.admintodo.create');
     }
 
     /**
@@ -43,13 +37,17 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        $task = new  Tasks;
-        $task->title = $request->title;
-        $task->due_date = $request->due_date;
-        $task->id_todos = $request->id_todos;
-        $task->save();
+        $this ->validate($request, [
+            'body' => 'required'
+        ]);
+        // $admintodo=$request->all();
+        // dd($admintodo);
+        $admintodo = new todo;
+        $admintodo->body = $request->body;
 
-        return redirect('task')-> with('message', 'task telah diupdate');
+        $admintodo->save();
+
+        return redirect('admintodo')-> with('message', 'todo telah ditambahkan');
     }
 
     /**
@@ -60,8 +58,7 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-        // $item = Tasks::find($id);
-        // return view('task.show',compact('item'));
+        //
     }
 
     /**
@@ -72,12 +69,8 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
-        $todos = todo::get();
-        $task = Tasks::where('id',$id)->first();
-        return view('task.edit',[
-                    'tasks' => $task,
-                    'todos' => $todos
-            ]);
+         $admintodo = todo::find($id);
+         return view('admin/admintodo.edit',compact('admintodo'));
     }
 
     /**
@@ -89,15 +82,15 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $this ->validate($request, [
-            'title' => 'required'
-        ]);        
+        $this ->validate($request, [
+            'body' => 'required'
+        ]);
+        $admintodo = todo::find($id);
+        $admintodo->body = $request->body;
+        
+        $admintodo->save();
 
-        $task = Tasks::find($id);
-        $task->title = $request->title;
-        $task->save();
-
-        return redirect('task')-> with('message', 'tasks telah diupdate');
+        return redirect('admintodo')-> with('message', 'todo telah diedit');
     }
 
     /**
@@ -108,8 +101,14 @@ class TasksController extends Controller
      */
     public function destroy($id)
     {
-        $item =Tasks::find($id);
-        $item->delete();
-        return redirect('/task');
+        $admintodo =todo::find($id);
+        $admintodo->delete();
+        return redirect('/admintodo');
+    }
+
+     public function deleteItem(Request $req)
+    {
+        todo::find($req->id)->delete();
+        return response()->json();
     }
 }

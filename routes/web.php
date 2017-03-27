@@ -29,9 +29,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/todo/{id}/edit', 'TodoController@edit');
     Route::patch('/todo/{id}/update', 'TodoController@update');
     Route::resource('task', 'TasksController');
-    Route::post('/task/create', 'TasksController@create');
-    Route::get('/task/{id}/edit', 'TasksController@edit');
-    Route::patch('/task/{id}/update', 'TasksController@update');
+    Route::get('/plus', function () {
+        return view('admin/admintask/plus');
+    });
 });
 
 Route::group(['middleware' => ['web']], function (){
@@ -55,7 +55,12 @@ Route::get('/addItem', function () {
 Route::get('/adduser', function () {
     return view('admin/anggota/adduser');
 });
-
+Route::get('/addItem', function () {
+    return view('admin/adminnote/addItem');
+});
+Route::get('/create_event',function () {
+    return view('admin/adminevent/create_event'); 
+});
 
 Route::group(['middleware' => ['web']], function () {
     Route::resource('note', 'notescontroller');
@@ -72,7 +77,13 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/admin-auth/test', 'SiswaController@test');
     Route::get('/admin-home','AdminHomeController@index');
     Route::resource('anggota', 'AnggotaController');
-    //Route::post('/admin/anggota','AnggotaController@store');
+    Route::post('/anggota/deleteItem', 'AnggotaController@deleteItem');
+    Route::resource('/admintodo','AdminTodoController');
+    Route::post('/admintodo/deleteItem', 'AdminTodoController@deleteItem');
+    Route::resource('/adminevent','AdminEventController');
+    Route::resource('/adminnote','AdminNoteController');
+    Route::resource('/admintask','AdminTaskController');
+    Route::post('/admintask/plus', 'AdminTaskController@create');
  });
 
     

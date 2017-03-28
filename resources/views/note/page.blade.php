@@ -16,7 +16,6 @@
         <div class="table-responsive">
             <table class="table table-borderless" id ="table">
                 <tr>
-                    <th>No.</th>
                     <th>Title</th>
                     <th>Body</th>
                     <th>Action</th>
@@ -26,7 +25,6 @@
                 <?php $no=1; ?>
                 @foreach ($catatan as $note)
                     <tr class="item{{$note->id}}">
-                        <td>{{$no++}}</td>
                         <td>{{($note->title)}}</td>
                         <td>{{$note->body}}</td>
                         <td>

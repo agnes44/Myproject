@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Event;
 use Illuminate\Http\Request;
-
+use App\Event;
+use Auth;
 class EventsController extends Controller
 {
     /**
@@ -14,9 +14,12 @@ class EventsController extends Controller
      */
     public function index()
     {
-        // $events = event::all();
-        // return view('event.list',compact('events'));
-        return view('event/list', ['events' => Event::orderBy('start')->get()]);
+        $user = Auth::user()->id;
+        $events = Event::where('user_id',$user)->get();
+        // $events = Event::all();
+        // dd($events);
+        return view('event.list',compact('events'));
+        // return view('event/list', ['events' => Event::orderBy('start')->get()]);
     }
 
     /**
@@ -54,7 +57,7 @@ class EventsController extends Controller
          $event->start =$request ->start;
          $event->end =$request ->end;
          $event->color = $request->color;
-         $event->save();
+         Auth::user()->event()->save($event);
           
          $request->session()->flash('success', 'The event was successfully saved!');
          return redirect('/event');

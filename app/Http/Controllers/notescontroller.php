@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\ note;
 use Validator;
 use Response;
+use Auth;
 use App\Http\Requests\note\editItem;
 use App\Http\Requests\note\deleteItem;
 use Illuminate\Supprot\Facades\Input;
@@ -19,7 +20,8 @@ class notescontroller extends Controller
      */
     public function index()
     {
-        $catatan =note::all();
+        $user = Auth::user()->id;
+        $catatan = note::where('user_id',$user)->get();
         return view('note.page', compact('catatan'));
     }
 
@@ -49,7 +51,8 @@ class notescontroller extends Controller
         $catatan = new  note;
         $catatan->title = $request->title;
         $catatan->body = $request->body;
-        $catatan->save();
+        
+        Auth::user()->note()->save($catatan);
 
         return redirect('note')-> with('message', 'note telah diupdate');
     }

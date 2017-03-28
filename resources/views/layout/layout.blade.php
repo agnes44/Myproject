@@ -117,7 +117,7 @@
                                 <li class="divider"></li>
 
                                     <li>
-                                        <a href="#">
+                                        <a href="/profile">
                                         <i class="fa fa-user fa-fw pull-right"></i>
                                             Profile
                                         </a>

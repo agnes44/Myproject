@@ -55,11 +55,11 @@ Route::get('/addItem', function () {
 Route::get('/adduser', function () {
     return view('admin/anggota/adduser');
 });
-Route::get('/addItem', function () {
-    return view('admin/adminnote/addItem');
+Route::get('/addnote', function () {
+    return view('admin/adminnote/addnote');
 });
-Route::get('/create_event',function () {
-    return view('admin/adminevent/create_event'); 
+Route::get('/add_event',function () {
+    return view('admin/adminevent/add_event'); 
 });
 
 Route::group(['middleware' => ['web']], function () {

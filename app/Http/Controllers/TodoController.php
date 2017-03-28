@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\todo\deleteItem;
 use App\todo;
+use Auth;
 class TodoController extends Controller
 {
     /**
@@ -14,8 +15,10 @@ class TodoController extends Controller
      */
     public function index()
     {
-         $todos =todo::all();
-         return view('todo.index',compact('todos'));
+        $user = Auth::user()->id;
+        $todos = Todo::where('user_id',$user)->get();
+        // dd($todos);
+        return view('todo.index',compact('todos'));
     }
 
     /**
@@ -42,9 +45,10 @@ class TodoController extends Controller
         // $todo=$request->all();
         // dd($todo);
         $todo = new todo;
+        // $todo = Auth::user()->id;
         $todo->body = $request->body;
 
-        $todo->save();
+        Auth::user()->todo()->save($todo);
 
         return redirect('todo')-> with('message', 'todo telah ditambahkan');
     }
